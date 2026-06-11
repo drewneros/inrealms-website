@@ -7,7 +7,7 @@
   <!-- PRIMARY SEO -->
   <title>InRealms — AI Automation Agency | AI Receptionists, Chatbots &amp; Workflow Automation</title>
   <meta name="description" content="InRealms builds AI receptionists, chatbots, and workflow automations that capture every lead and book them 24/7. Custom GoHighLevel, Make.com & web systems for service businesses worldwide." />
-  <meta name="keywords" content="AI automation agency, AI receptionist, AI chatbot for business, GoHighLevel agency, Make.com automation, workflow automation, lead generation automation, AI agency Dubai, business automation services, AI for real estate, AI for clinics, AI for service business, custom AI solutions, conversational AI, missed call text back, booking automation, CRM automation, lead capture system, 24/7 AI assistant" />
+  <meta name="keywords" content="AI automation agency, AI receptionist, AI chatbot for business, GoHighLevel agency, Make.com automation, workflow automation, lead generation automation, AI agency Sydney, AI agency Australia, business automation services, AI for real estate agents, AI for clinics, AI for service business, custom AI solutions, conversational AI, missed call text back, booking automation, CRM automation, lead capture system, 24/7 AI assistant" />
   <meta name="author" content="Drew Neros — InRealms" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#03080F" />
@@ -59,7 +59,7 @@
           "worksFor": { "@id": "https://inrealms.com/#org" }
         },
         "areaServed": "Worldwide",
-        "address": { "@type": "PostalAddress", "addressLocality": "Dubai", "addressCountry": "AE" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Sydney", "addressCountry": "AU" },
         "priceRange": "$$",
         "sameAs": [],
         "aggregateRating": {
@@ -634,6 +634,82 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
     }
+
+    /* PROBLEM STATS BAR */
+    #problem-stats {
+      padding: 60px 0 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .problem-stats-inner {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0;
+      background: rgba(37,99,235,0.06);
+      border: 1px solid rgba(37,99,235,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .problem-stat-card {
+      flex: 1;
+      padding: 36px 32px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .ps-number {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .ps-pct {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    .ps-label {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.5;
+      max-width: 200px;
+    }
+    .ps-source {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      opacity: 0.6;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .ps-divider {
+      width: 1px;
+      background: rgba(37,99,235,0.2);
+      align-self: stretch;
+      margin: 20px 0;
+    }
+    .ps-cta-line {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+    .ps-cta-line a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .ps-cta-line a:hover { text-decoration: underline; }
+    @media (max-width: 640px) {
+      .problem-stats-inner { flex-direction: column; }
+      .ps-divider { width: auto; height: 1px; margin: 0 20px; align-self: auto; }
+      .problem-stat-card { padding: 28px 24px; }
+      .ps-number { font-size: 2.6rem; }
+    }
+    /* END PROBLEM STATS BAR */
 
     .service-card {
       background: var(--glass);
@@ -1867,6 +1943,32 @@
     </div>
   </section>
 
+  <!-- PROBLEM STATS BAR -->
+  <section id="problem-stats">
+    <div class="container">
+      <div class="problem-stats-inner reveal">
+        <div class="problem-stat-card">
+          <div class="ps-number">80<span class="ps-pct">%</span></div>
+          <div class="ps-label">of leads are lost if you don't respond within 5 minutes</div>
+          <div class="ps-source">Harvard Business Review</div>
+        </div>
+        <div class="ps-divider"></div>
+        <div class="problem-stat-card">
+          <div class="ps-number">62<span class="ps-pct">%</span></div>
+          <div class="ps-label">of after-hours calls go unanswered at small businesses</div>
+          <div class="ps-source">Industry average</div>
+        </div>
+        <div class="ps-divider"></div>
+        <div class="problem-stat-card">
+          <div class="ps-number">35<span class="ps-pct">%</span></div>
+          <div class="ps-label">of leads close with the first business that responds</div>
+          <div class="ps-source">InsideSales Research</div>
+        </div>
+      </div>
+      <p class="ps-cta-line">Every hour you wait is revenue someone else is booking. <a href="https://tally.so/r/mVk1JE" target="_blank" rel="noopener">Fix it →</a></p>
+    </div>
+  </section>
+
   <!-- SERVICES -->
   <section id="services">
     <div class="container">
@@ -2266,7 +2368,7 @@
         <div>
           <div class="founder-label">Meet the founder</div>
           <h2 class="founder-name">Drew Neros</h2>
-          <div class="founder-role">Founder of InRealms · Dubai 🇦🇪</div>
+          <div class="founder-role">Founder of InRealms · Sydney 🇦🇺</div>
           <p class="founder-bio">
             I started InRealms because I kept seeing brilliant business owners drowning in admin —
             missed calls, unanswered DMs, leads slipping through the cracks. I build AI receptionists,
@@ -2275,7 +2377,7 @@
             hand-built for how <em>your</em> business runs — no copy-paste templates, no fluff.
           </p>
           <div class="founder-meta">
-            <div class="founder-meta-item"><span class="dot-c"></span> Based in Dubai, working globally</div>
+            <div class="founder-meta-item"><span class="dot-c"></span> Based in Sydney, working globally</div>
             <div class="founder-meta-item"><span class="dot-c"></span> 4+ years building automation systems</div>
             <div class="founder-meta-item"><span class="dot-c"></span> Personal builds only — no agency overhead</div>
           </div>
@@ -2326,7 +2428,7 @@
         <a href="tel:+17347246316">+1 (734) 724-6316</a>
       </div>
     </div>
-    <div class="footer-copy">© 2026 InRealms · Dubai, UAE · All rights reserved.</div>
+    <div class="footer-copy">© 2026 InRealms · Sydney, AU · All rights reserved.</div>
   </footer>
 
   <!-- BOOKING MODAL -->
@@ -2554,7 +2656,7 @@
     // ─── LIVE TOASTS (social proof) ───
     const toastMessages = [
       { name: 'Sarah', city: 'London', action: 'just booked a free audit' },
-      { name: 'Marcus', city: 'Dubai', action: 'just launched their AI receptionist' },
+      { name: 'Marcus', city: 'Sydney', action: 'just launched their AI receptionist' },
       { name: 'Elena', city: 'Madrid', action: 'just connected their CRM' },
       { name: 'James', city: 'Sydney', action: 'just booked a discovery call' },
       { name: 'Priya', city: 'Singapore', action: 'just went live with WhatsApp AI' },
