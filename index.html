@@ -30,8 +30,10 @@
   <meta name="twitter:image" content="https://inrealms.com/logo-wordmark.png" />
 
   <!-- ICONS -->
-  <link rel="icon" type="image/png" href="logo.png" />
-  <link rel="apple-touch-icon" href="logo.png" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="favicon-512.png" />
 
   <!-- PERFORMANCE HINTS -->
   <link rel="preconnect" href="https://tally.so" />
@@ -1746,6 +1748,268 @@
       .reviews-grid { grid-template-columns: 1fr; }
       .modal-content { height: 88vh; }
     }
+
+    /* ─── GLASSMORPHISM HERO ─── */
+    #hero {
+      min-height: 100vh;
+      height: 100vh;
+      padding: 12px !important;
+      background: #f0f0f0;
+      display: flex !important;
+      align-items: stretch;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-glass-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 1536px;
+      border-radius: 48px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+    .hero-bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 65% center;
+      z-index: 0;
+    }
+    @media (min-width: 1024px) {
+      .hero-bg-video { object-position: center; }
+    }
+    .hero-content-overlay {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 100px;
+    }
+    .hero-text-center {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 24px;
+      text-align: center;
+      max-width: 900px;
+    }
+    .hero-badge-glass {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 12px;
+      width: fit-content;
+      animation: hgFadeUp 0.6s ease-out both;
+    }
+    .hero-badge-glass span {
+      font-size: 14px;
+      color: rgba(30,50,90,0.9);
+      font-weight: 400;
+    }
+    .hero-title-glass {
+      font-size: clamp(38px, 6.5vw, 80px);
+      font-weight: 400;
+      color: #5E6470;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 10px;
+      animation: hgFadeScale 0.8s ease-out 0.2s both;
+      font-family: 'NeueMontreal', 'Inter', sans-serif;
+    }
+    .hero-sub-glass {
+      font-size: clamp(14px, 1.4vw, 18px);
+      color: rgba(94,100,112,0.85);
+      max-width: 560px;
+      line-height: 1.65;
+      font-weight: 300;
+      animation: hgFadeIn 0.8s ease-out 0.4s both;
+    }
+    @keyframes hgFadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hgFadeScale {
+      from { opacity: 0; transform: scale(0.98); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes hgFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    /* Bottom Left Card */
+    .hero-bl-card {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      padding: 20px;
+      border-radius: 36px;
+      background: rgba(255,255,255,0.3);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 180px;
+      width: fit-content;
+      animation: hgSlideLeft 0.8s ease-out 0.2s both;
+      z-index: 5;
+    }
+    @keyframes hgSlideLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .hero-bl-stat-val {
+      font-size: 36px;
+      font-weight: 400;
+      color: rgba(30,50,90,0.9);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .hero-bl-stat-label {
+      font-size: 10px;
+      color: rgba(30,50,90,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 400;
+      margin-top: 3px;
+    }
+    .hero-bl-btn {
+      display: flex;
+      align-items: center;
+      background: white;
+      border: none;
+      border-radius: 100px;
+      padding: 6px 20px 6px 6px;
+      gap: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      font-family: 'NeueMontreal', 'Inter', sans-serif;
+      align-self: flex-start;
+      text-decoration: none;
+    }
+    .hero-bl-btn:hover { opacity: 0.88; transform: scale(1.02); }
+    .hero-bl-btn:active { transform: scale(0.98); }
+    .hero-bl-btn-icon {
+      background: rgba(30,50,90,0.1);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .hero-bl-btn-text {
+      font-size: 14px;
+      color: rgba(30,50,90,0.9);
+      font-weight: 400;
+      white-space: nowrap;
+    }
+    /* Bottom Right Corner */
+    .hero-br-corner {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 32px 24px 24px 56px;
+      background: #f0f0f0;
+      border-radius: 56px 0 0 0;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      animation: hgSlideUp 0.8s ease-out 0.4s both;
+      z-index: 5;
+    }
+    @keyframes hgSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-br-mask-top {
+      position: absolute;
+      top: -56px;
+      right: 0;
+      width: 56px;
+      height: 56px;
+      pointer-events: none;
+    }
+    .hero-br-mask-left {
+      position: absolute;
+      bottom: 0;
+      left: -56px;
+      width: 56px;
+      height: 56px;
+      pointer-events: none;
+    }
+    .hero-br-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(30,50,90,0.05);
+      border: 1px solid rgba(30,50,90,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .hero-br-info { display: flex; flex-direction: column; gap: 2px; }
+    .hero-br-title {
+      font-size: 20px;
+      font-weight: 400;
+      color: rgba(30,50,90,0.95);
+    }
+    .hero-br-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: rgba(30,50,90,0.6);
+      cursor: pointer;
+      transition: color 0.2s;
+      font-size: 14px;
+      text-decoration: none;
+      font-weight: 400;
+    }
+    .hero-br-link:hover { color: rgba(30,50,90,0.85); }
+    /* Nav light mode over hero */
+    nav.nav-on-hero {
+      background: rgba(255,255,255,0.15) !important;
+      border-bottom-color: rgba(30,50,90,0.06) !important;
+    }
+    nav.nav-on-hero .nav-logo { color: rgba(30,50,90,0.9); }
+    nav.nav-on-hero .nav-logo img { filter: none; }
+    nav.nav-on-hero .nav-links a { color: rgba(30,50,90,0.65); }
+    nav.nav-on-hero .nav-links a:hover { color: rgba(30,50,90,0.9); }
+    nav.nav-on-hero .nav-cta { background: rgba(30,50,90,0.85); }
+    /* Mobile overrides */
+    @media (max-width: 960px) {
+      #hero { height: auto !important; min-height: 100svh; padding: 8px !important; }
+      .hero-glass-wrap { border-radius: 24px; min-height: calc(100svh - 16px); }
+      .hero-content-overlay { padding-top: 80px; }
+      .hero-bl-card {
+        bottom: 100px; right: 16px; left: auto;
+        min-width: 140px; padding: 14px; border-radius: 24px; gap: 10px;
+      }
+      .hero-bl-stat-val { font-size: 26px; }
+      .hero-br-corner { padding: 20px 16px 16px 40px; border-radius: 40px 0 0 0; gap: 14px; }
+      .hero-br-mask-top { top: -40px; width: 40px; height: 40px; }
+      .hero-br-mask-left { left: -40px; width: 40px; height: 40px; }
+      .hero-br-icon { width: 42px; height: 42px; }
+      .hero-br-title { font-size: 15px; }
+      .hero-br-link { font-size: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -1777,47 +2041,63 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-grid-bg"></div>
-    <div class="hero-glow-1"></div>
-    <div class="hero-glow-2"></div>
-    <div class="hero-inner">
-      <div class="hero-text">
-        <div class="hero-badge">
-          <span class="dot"></span>
-          AI-Powered Automation
-        </div>
-        <h1 class="hero-title">
-          Capture every lead.<br>
-          Book them on <span class="grad-text">autopilot.</span>
-        </h1>
-        <p class="hero-sub">
-          We build AI receptionists, chatbots, and workflows that answer in
-          seconds, qualify leads, and fill your calendar — 24/7,
-          across every channel, while you focus on the work that matters.
-        </p>
-        <div class="hero-actions">
-          <a href="https://tally.so/r/mVk1JE" target="_blank" rel="noopener" class="btn-primary">
-            Get a Free Audit
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="#services" class="btn-ghost">
-            See what we build
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#8B9DC3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="ai-figure-wrap">
-          <div class="ai-orbit ai-orbit-1"></div>
-          <div class="ai-orbit ai-orbit-2"></div>
-          <div class="ai-orbit ai-orbit-3"></div>
-          <div class="ai-core">
-            <img src="logo.png" alt="InRealms" />
+    <div class="hero-glass-wrap">
+      <video class="hero-bg-video" autoplay muted loop playsinline>
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260428_193507_4286c423-2fd9-4efd-92bd-91a939453fc1.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-content-overlay">
+        <!-- Text block -->
+        <div class="hero-text-center">
+          <div class="hero-badge-glass">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(30,50,90,0.8)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-5 3.6 1.9-5.8L4 8.8h6.1z"/>
+            </svg>
+            <span>AI Automation Agency</span>
           </div>
-          <!-- Floating labels -->
-          <div class="ai-node ai-node-1">AI Receptionist</div>
-          <div class="ai-node ai-node-2">24/7 Automation</div>
-          <div class="ai-node ai-node-3">Lead Capture</div>
+          <h1 class="hero-title-glass">Capture every lead.<br>Book on autopilot.</h1>
+          <p class="hero-sub-glass">We build AI receptionists, chatbots, and workflows that qualify leads and fill your calendar — 24/7, while you sleep.</p>
+        </div>
+        <!-- Bottom Left Card -->
+        <div class="hero-bl-card">
+          <div>
+            <div class="hero-bl-stat-val">&lt;60s</div>
+            <div class="hero-bl-stat-label">Lead Response Time</div>
+          </div>
+          <a href="https://tally.so/r/mVk1JE" target="_blank" rel="noopener" class="hero-bl-btn">
+            <div class="hero-bl-btn-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(30,50,90,0.9)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </div>
+            <span class="hero-bl-btn-text">Book Free Audit</span>
+          </a>
+        </div>
+        <!-- Bottom Right Corner -->
+        <div class="hero-br-corner">
+          <div class="hero-br-mask-top">
+            <svg width="100%" height="100%" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M56 56V0C56 30.9279 30.9279 56 0 56H56Z" fill="#f0f0f0"/>
+            </svg>
+          </div>
+          <div class="hero-br-mask-left">
+            <svg width="100%" height="100%" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M56 56H0C30.9279 56 56 30.9279 56 0V56Z" fill="#f0f0f0"/>
+            </svg>
+          </div>
+          <div class="hero-br-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(30,50,90,0.8)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </div>
+          <div class="hero-br-info">
+            <span class="hero-br-title">Free Audit Call</span>
+            <a href="https://tally.so/r/mVk1JE" target="_blank" rel="noopener" class="hero-br-link">
+              Book Now
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -2354,9 +2634,17 @@
 
     // ─── NAV SCROLL ───
     const navEl = document.getElementById('navbar');
+    const heroEl = document.getElementById('hero');
     function handleNavScroll() {
-      if (window.scrollY > 80) navEl.classList.add('scrolled');
-      else navEl.classList.remove('scrolled');
+      if (window.scrollY > 80) {
+        navEl.classList.add('scrolled');
+        navEl.classList.remove('nav-on-hero');
+      } else {
+        navEl.classList.remove('scrolled');
+        const heroBottom = heroEl ? heroEl.getBoundingClientRect().bottom : 0;
+        if (heroBottom > 80) navEl.classList.add('nav-on-hero');
+        else navEl.classList.remove('nav-on-hero');
+      }
     }
     window.addEventListener('scroll', handleNavScroll, { passive: true });
     handleNavScroll();
