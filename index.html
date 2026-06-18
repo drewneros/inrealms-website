@@ -808,16 +808,7 @@
       gap: 40px;
       position: relative;
     }
-    .process-steps::before {
-      content: '';
-      position: absolute;
-      top: 28px;
-      left: calc(16.67% + 36px);
-      right: calc(16.67% + 36px);
-      height: 1px;
-      background: linear-gradient(90deg, var(--blue), var(--purple));
-      opacity: 0.4;
-    }
+    .process-steps::before { display: none; }
 
     .process-step {
       position: relative;
