@@ -1817,23 +1817,6 @@
       .modal-content { height: 88vh; }
     }
 
-    /* ─── MAINFRAME VIDEO HERO ─── */
-    #hero { position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: flex-end; justify-content: flex-start; padding-bottom: 72px; }
-    @media (min-width: 768px) { #hero { align-items: center; padding-bottom: 80px; } }
-    .hero-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% center; z-index: 0; pointer-events: none; }
-    .hero-vid-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(135deg, rgba(3,8,15,0.88) 0%, rgba(3,8,15,0.55) 65%, rgba(6,13,26,0.7) 100%); pointer-events: none; }
-    .hero-new-content { position: relative; z-index: 3; max-width: 560px; }
-    .hero-blur-label { font-size: clamp(13px, 2.2vw, 17px); line-height: 1.4; color: rgba(240,244,255,0.6); filter: blur(3.5px); margin-bottom: 18px; pointer-events: none; user-select: none; }
-    .hero-typewriter-p { font-size: clamp(16px, 2.8vw, 22px); line-height: 1.45; color: var(--white); margin-bottom: 28px; min-height: 48px; }
-    .tw-cursor { display: inline-block; width: 2px; height: 1.1em; background: var(--white); vertical-align: middle; margin-left: 2px; animation: twBlink 1s step-end infinite; }
-    @keyframes twBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-    .hero-pills-row { display: flex; flex-wrap: wrap; gap: 0; opacity: 0; transform: translateY(8px); transition: opacity 0.4s ease, transform 0.4s ease; }
-    .hero-pills-row.pills-visible { opacity: 1; transform: translateY(0); }
-    .h-pill { display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.06); color: var(--white); border: 1px solid rgba(255,255,255,0.13); border-radius: 100px; font-size: 13px; padding: 0.32em 16px; margin: 0 4px 8px; white-space: nowrap; cursor: pointer; text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s; }
-    .h-pill:hover { background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%); border-color: transparent; color: white; }
-    .h-pill-email { background: transparent; border-color: rgba(255,255,255,0.2); gap: 7px; }
-    .h-pill-email:hover { background: rgba(37,99,235,0.15); border-color: rgba(37,99,235,0.4); }
-    .h-pill-email .email-ul { text-decoration: underline; text-underline-offset: 1px; }
 
   </style>
 </head>
@@ -1866,21 +1849,46 @@
 
   <!-- HERO -->
   <section id="hero">
-    <video class="hero-vid" id="hero-vid" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260530_042513_df96a13b-6155-4f6e-8b93-c9dee66fba08.mp4" muted playsinline preload="auto"></video>
-    <div class="hero-vid-overlay"></div>
-    <div class="container">
-      <div class="hero-new-content">
-        <p class="hero-blur-label">Hey there, this is Alex,<br>InRealms' AI Receptionist for service businesses</p>
-        <p class="hero-typewriter-p" id="hero-tw"><span class="tw-cursor"></span></p>
-        <div class="hero-pills-row" id="hero-pills">
-          <a href="https://tally.so/r/mVk1JE" target="_blank" rel="noopener" class="h-pill">Book a free audit</a>
-          <a href="#services" class="h-pill">See what we build</a>
-          <a href="#process" class="h-pill">How it works</a>
-          <a href="#reviews" class="h-pill">Client results</a>
-          <button class="h-pill h-pill-email" id="copy-email-pill" onclick="copyEmail()">
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="0.5" y="2.5" width="9" height="9" rx="1.5" stroke="currentColor"/><path d="M3.5 2.5V1.5A1 1 0 0 1 4.5.5h7a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H10.5" stroke="currentColor"/></svg>
-            <span class="email-ul">hello@inrealms.com.au</span>
-          </button>
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          AI-Powered Automation
+        </div>
+        <h1 class="hero-title">
+          Capture every lead.<br>
+          Book them on <span class="grad-text">autopilot.</span>
+        </h1>
+        <p class="hero-sub">
+          We build AI receptionists, chatbots, and workflows that answer in
+          seconds, qualify leads, and fill your calendar — 24/7,
+          across every channel, while you focus on the work that matters.
+        </p>
+        <div class="hero-actions">
+          <a href="https://tally.so/r/mVk1JE" target="_blank" rel="noopener" class="btn-primary">
+            Get a Free Audit
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#services" class="btn-ghost">
+            See what we build
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#8B9DC3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="ai-figure-wrap">
+          <div class="ai-orbit ai-orbit-1"></div>
+          <div class="ai-orbit ai-orbit-2"></div>
+          <div class="ai-orbit ai-orbit-3"></div>
+          <div class="ai-core">
+            <img src="logo.png" alt="InRealms" />
+          </div>
+          <div class="ai-node ai-node-1">AI Receptionist</div>
+          <div class="ai-node ai-node-2">24/7 Automation</div>
+          <div class="ai-node ai-node-3">Lead Capture</div>
         </div>
       </div>
     </div>
@@ -2449,63 +2457,6 @@
     }
     window.addEventListener('scroll', handleNavScroll, { passive: true });
     handleNavScroll();
-
-    // ─── VIDEO MOUSE-SCRUB ───
-    (function() {
-      const vid = document.getElementById('hero-vid');
-      if (!vid) return;
-      let seeking = false;
-      const SENSITIVITY = 0.6;
-      function scrubTo(t) {
-        if (seeking) return;
-        seeking = true;
-        vid.currentTime = t;
-        vid.onseeked = function() { seeking = false; };
-      }
-      vid.addEventListener('loadedmetadata', function() {
-        scrubTo(0);
-        window.addEventListener('mousemove', function(e) {
-          if (!vid.duration) return;
-          const frac = e.clientX / window.innerWidth;
-          scrubTo(frac * vid.duration * SENSITIVITY);
-        }, { passive: true });
-      });
-    })();
-
-    // ─── TYPEWRITER ───
-    (function() {
-      const el = document.getElementById('hero-tw');
-      const pillsRow = document.getElementById('hero-pills');
-      if (!el) return;
-      const lines = [
-        'Every lead that doesn\'t hear from you in 5 minutes goes cold.',
-        'We build AI receptionists that respond instantly, qualify leads,',
-        'and fill your calendar — 24/7, while you focus on the work.'
-      ];
-      const full = lines.join('\n');
-      let i = 0;
-      const cursor = el.querySelector('.tw-cursor');
-      const interval = setInterval(function() {
-        if (i <= full.length) {
-          el.innerHTML = full.slice(0, i).replace(/\n/g, '<br>') + '<span class="tw-cursor"></span>';
-          i++;
-        } else {
-          clearInterval(interval);
-          if (pillsRow) pillsRow.classList.add('pills-visible');
-        }
-      }, 28);
-    })();
-
-    // ─── COPY EMAIL ───
-    function copyEmail() {
-      navigator.clipboard.writeText('hello@inrealms.com.au').then(function() {
-        const btn = document.getElementById('copy-email-pill');
-        if (!btn) return;
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Copied!</span>';
-        setTimeout(function() { btn.innerHTML = orig; }, 2000);
-      });
-    }
 
     // ─── STAR RATING ───
     let selectedRating = 0;
