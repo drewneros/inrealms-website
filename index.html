@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- PRIMARY SEO -->
-  <title>InRealms — AI Automation Agency | AI Receptionists, Chatbots &amp; Workflow Automation</title>
+  <title>InRealms | AI Automation Agency | AI Receptionists, Chatbots &amp; Workflow Automation</title>
   <meta name="description" content="InRealms builds AI receptionists, chatbots, and workflow automations that capture every lead and book them 24/7. Custom GoHighLevel, Make.com & web systems for service businesses worldwide." />
   <meta name="keywords" content="AI automation agency, AI receptionist, AI chatbot for business, GoHighLevel agency, Make.com automation, workflow automation, lead generation automation, AI agency Sydney, AI agency Australia, business automation services, AI for real estate agents, AI for clinics, AI for service business, custom AI solutions, conversational AI, missed call text back, booking automation, CRM automation, lead capture system, 24/7 AI assistant" />
   <meta name="author" content="Drew Neros, InRealms" />
@@ -16,7 +16,7 @@
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://inrealms.com/" />
-  <meta property="og:title" content="InRealms — AI Automation Agency" />
+  <meta property="og:title" content="InRealms | AI Automation Agency" />
   <meta property="og:description" content="AI receptionists, chatbots, and intelligent workflows that capture every lead and book them while you sleep." />
   <meta property="og:image" content="https://inrealms.com/logo-wordmark.png" />
   <meta property="og:image:alt" content="InRealms AI Automation Agency" />
@@ -27,7 +27,7 @@
 
   <!-- TWITTER / X -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="InRealms — AI Automation Agency" />
+  <meta name="twitter:title" content="InRealms | AI Automation Agency" />
   <meta name="twitter:description" content="AI receptionists, chatbots, and intelligent workflows that work 24/7. Custom builds for service businesses." />
   <meta name="twitter:image" content="https://inrealms.com/logo-wordmark.png" />
 
@@ -47,7 +47,7 @@
   <link rel="preconnect" href="https://api.leadconnectorhq.com" />
   <link rel="dns-prefetch" href="https://tally.so" />
 
-  <!-- STRUCTURED DATA — Organization / Service / FAQ / Reviews -->
+  <!-- STRUCTURED DATA, Organization / Service / FAQ / Reviews -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -89,7 +89,7 @@
         "@type": "Service",
         "name": "Workflow Automation",
         "provider": { "@id": "https://inrealms.com/#org" },
-        "description": "GoHighLevel and Make.com automations that eliminate repetitive work — follow-ups, CRM sync, missed-call text-back."
+        "description": "GoHighLevel and Make.com automations that eliminate repetitive work, follow-ups, CRM sync, missed-call text-back."
       },
       {
         "@type": "Service",
@@ -107,13 +107,13 @@
         "@type": "FAQPage",
         "mainEntity": [
           { "@type": "Question", "name": "How long does it take to go live?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Most systems are live in 7–14 days from the audit call. Simple chatbots can ship in 3–5 days. We move fast — no bloated discovery phases." } },
+            "acceptedAnswer": { "@type": "Answer", "text": "Most systems are live in 7–14 days from the audit call. Simple chatbots can ship in 3–5 days. We move fast, no bloated discovery phases." } },
           { "@type": "Question", "name": "Do I need to use GoHighLevel?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. We build on the stack you already use — GoHighLevel, Make.com, n8n, HubSpot, Pipedrive, or custom APIs. We recommend tools only when they save you money." } },
+            "acceptedAnswer": { "@type": "Answer", "text": "No. We build on the stack you already use, GoHighLevel, Make.com, n8n, HubSpot, Pipedrive, or custom APIs. We recommend tools only when they save you money." } },
           { "@type": "Question", "name": "How much does it cost?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Most projects fall between $1,500–$8,000 one-time build plus a small monthly retainer for hosting, AI usage, and ongoing tuning. The free audit gives you an exact quote — no surprises." } },
+            "acceptedAnswer": { "@type": "Answer", "text": "Focused builds like an AI receptionist start around $800 setup plus a small monthly retainer for hosting, AI usage, and ongoing tuning. Larger multi-system projects run $1,500 to $8,000. The free audit gives you an exact quote, no surprises." } },
           { "@type": "Question", "name": "Who owns the system after it's built?",
-            "acceptedAnswer": { "@type": "Answer", "text": "You do — fully. Every account is in your name, every workflow is documented, and you can walk away at any time with the keys." } },
+            "acceptedAnswer": { "@type": "Answer", "text": "You do, fully. Every account is in your name, every workflow is documented, and you can walk away at any time with the keys." } },
           { "@type": "Question", "name": "What industries do you work with?",
             "acceptedAnswer": { "@type": "Answer", "text": "Service businesses where every missed lead costs money: real estate, dental and aesthetic clinics, pilates and fitness studios, agencies, coaches, and trades." } }
         ]
@@ -1752,39 +1752,6 @@
       font-weight: 300;
     }
 
-    /* ─── LIVE TOAST ─── */
-    .live-toast {
-      position: fixed;
-      bottom: 24px; left: 24px;
-      background: rgba(8,13,24,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(37,99,235,0.25);
-      border-radius: 14px;
-      padding: 12px 18px 12px 14px;
-      font-size: 13px;
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      max-width: 320px;
-      z-index: 90;
-      transform: translateX(-140%);
-      transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    }
-    .live-toast.show { transform: translateX(0); }
-    .live-toast .pulse {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 12px var(--cyan);
-      animation: pulse 1.6s infinite;
-      flex-shrink: 0;
-    }
-    .live-toast .lt-text { font-weight: 400; color: #B8C5E0; line-height: 1.4; }
-    .live-toast .lt-text strong { color: var(--white); font-weight: 600; }
-
     /* ─── COUNTER ─── */
     .metric-value[data-target] { transition: none; }
 
@@ -1813,7 +1780,6 @@
       .calendar-inner { grid-template-columns: 1fr; gap: 32px; }
       .calendar-embed { min-height: 560px; }
       .calendar-embed iframe { min-height: 560px; }
-      .live-toast { left: 12px; right: 12px; bottom: 12px; max-width: none; }
       .cursor-glow { display: none; }
       .metric-grid { grid-template-columns: 1fr 1fr; }
       .founder-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
@@ -1830,12 +1796,6 @@
 
   <!-- CURSOR GLOW -->
   <div class="cursor-glow" id="cursor-glow"></div>
-
-  <!-- LIVE TOAST -->
-  <div class="live-toast" id="live-toast">
-    <span class="pulse"></span>
-    <div class="lt-text" id="lt-text"></div>
-  </div>
 
   <!-- NAV -->
   <nav id="navbar">
@@ -1870,7 +1830,7 @@
         </h1>
         <p class="hero-sub">
           We build AI receptionists, chatbots, and workflows that answer in
-          seconds, qualify leads, and fill your calendar — 24/7,
+          seconds, qualify leads, and fill your calendar, 24/7,
           across every channel, while you focus on the work that matters.
         </p>
         <div class="hero-actions">
@@ -1976,7 +1936,7 @@
       <div class="reveal">
         <div class="section-label">What We Build</div>
         <h2 class="section-title">Everything your business<br>needs to run on autopilot</h2>
-        <p class="section-sub">From AI that answers your phones to full workflow automation — we build the systems so you don't have to.</p>
+        <p class="section-sub">From AI that answers your phones to full workflow automation, we build the systems so you don't have to.</p>
       </div>
       <div class="services-grid">
         <div class="service-card reveal reveal-delay-1">
@@ -1984,7 +1944,7 @@
           <div class="service-card-inner">
             <div class="service-icon icon-cyan">🤖</div>
             <h3 class="service-title">AI Receptionist & Chatbots</h3>
-            <p class="service-desc">Custom AI agents that handle your inbound leads, answer questions, qualify prospects, and book appointments — 24/7, no days off.</p>
+            <p class="service-desc">Custom AI agents that handle your inbound leads, answer questions, qualify prospects, and book appointments, 24/7, no days off.</p>
             <div class="service-tags">
               <span class="tag">Lead qualification</span>
               <span class="tag">Booking automation</span>
@@ -2012,7 +1972,7 @@
           <div class="service-card-inner">
             <div class="service-icon icon-purple">🌐</div>
             <h3 class="service-title">Custom Websites</h3>
-            <p class="service-desc">Fast, modern websites built for conversion — not just looks. Designed to capture leads and feed straight into your automation stack.</p>
+            <p class="service-desc">Fast, modern websites built for conversion, not just looks. Designed to capture leads and feed straight into your automation stack.</p>
             <div class="service-tags">
               <span class="tag">Lead capture</span>
               <span class="tag">Mobile-first</span>
@@ -2026,7 +1986,7 @@
           <div class="service-card-inner">
             <div class="service-icon icon-pink">📈</div>
             <h3 class="service-title">Lead Generation & CRM</h3>
-            <p class="service-desc">End-to-end lead systems — scraping, outreach, capture, follow-up, and CRM pipelines that keep your business growing without manual work.</p>
+            <p class="service-desc">End-to-end lead systems, scraping, outreach, capture, follow-up, and CRM pipelines that keep your business growing without manual work.</p>
             <div class="service-tags">
               <span class="tag">Lead scraping</span>
               <span class="tag">Cold outreach</span>
@@ -2045,7 +2005,7 @@
       <div class="reveal">
         <div class="section-label">How It Works</div>
         <h2 class="section-title">From call to running system<br>in days, not months</h2>
-        <p class="section-sub">We move fast. No bloated discovery phases — just a clear process that gets your automation live quickly.</p>
+        <p class="section-sub">We move fast. No bloated discovery phases, just a clear process that gets your automation live quickly.</p>
       </div>
       <div class="process-steps">
         <div class="process-step reveal reveal-delay-1">
@@ -2056,7 +2016,7 @@
         <div class="process-step reveal reveal-delay-2">
           <div class="step-num">02</div>
           <h3 class="step-title">We Build Your System</h3>
-          <p class="step-desc">Custom-built to your niche and tools. No generic templates — every AI agent, workflow, and integration is tailored to how your business actually runs.</p>
+          <p class="step-desc">Custom-built to your niche and tools. No generic templates, every AI agent, workflow, and integration is tailored to how your business actually runs.</p>
         </div>
         <div class="process-step reveal reveal-delay-3">
           <div class="step-num">03</div>
@@ -2080,7 +2040,7 @@
           <div class="compare-tag">Without Automation</div>
           <h3 class="compare-title">Leads slip through the cracks</h3>
           <ul class="compare-list">
-            <li><span class="ic">✕</span> Inbound leads wait hours for a reply — most never come back</li>
+            <li><span class="ic">✕</span> Inbound leads wait hours for a reply, most never come back</li>
             <li><span class="ic">✕</span> You answer the same 5 questions on WhatsApp every day</li>
             <li><span class="ic">✕</span> Bookings happen only when someone manually follows up</li>
             <li><span class="ic">✕</span> Your CRM is half-empty, half-wrong, fully ignored</li>
@@ -2093,10 +2053,10 @@
           <h3 class="compare-title">Every lead is captured &amp; booked</h3>
           <ul class="compare-list">
             <li><span class="ic">✓</span> AI replies in under 60 seconds, day or night, in any language</li>
-            <li><span class="ic">✓</span> FAQs answered automatically — only qualified leads reach you</li>
+            <li><span class="ic">✓</span> FAQs answered automatically, only qualified leads reach you</li>
             <li><span class="ic">✓</span> Calendar fills itself; SMS and email confirmations go out instantly</li>
             <li><span class="ic">✓</span> Every conversation logged, tagged, and ready for follow-up</li>
-            <li><span class="ic">✓</span> 24/7 coverage — Sunday at 3am converts just like Tuesday at noon</li>
+            <li><span class="ic">✓</span> 24/7 coverage, Sunday at 3am converts just like Tuesday at noon</li>
             <li><span class="ic">✓</span> Same traffic, 5–10× more booked calls and closed deals</li>
           </ul>
         </div>
@@ -2109,7 +2069,7 @@
     <div class="container">
       <div class="showcase-inner">
         <div class="showcase-flow reveal">
-          <div class="flow-header">Live automation — Real estate client</div>
+          <div class="flow-header">Live demo: real estate flow</div>
           <div class="flow-node active">
             <div class="flow-icon-wrap">📩</div>
             <div class="flow-info">
@@ -2152,7 +2112,7 @@
         <div class="showcase-text reveal reveal-delay-2">
           <div class="section-label">Capabilities</div>
           <h2 class="section-title">This runs while<br>you sleep</h2>
-          <p class="section-sub">The average business loses 40% of leads from slow response times. Our AI responds in seconds — not hours.</p>
+          <p class="section-sub">The average business loses 40% of leads from slow response times. Our AI responds in seconds, not hours.</p>
           <div class="metric-grid">
             <div class="metric-card">
               <div class="metric-value" data-target="60" data-prefix="<" data-suffix="s">&lt;60s</div>
@@ -2269,7 +2229,7 @@
             <div class="upload-preview" id="upload-preview"><span id="upload-icon">📷</span></div>
             <input type="file" id="r-photo-input" accept="image/*" />
             <button type="button" class="upload-btn" onclick="document.getElementById('r-photo-input').click()">Add your photo</button>
-            <div class="upload-hint">Optional — adds a personal touch. Max 2MB.</div>
+            <div class="upload-hint">Optional, adds a personal touch. Max 2MB.</div>
           </div>
           <div class="form-group" style="margin-bottom:24px;">
             <label>Your review</label>
@@ -2284,7 +2244,7 @@
           <p class="form-note">Reviews are displayed publicly. We don't edit or filter them.</p>
         </div>
         <div class="form-success" id="form-success">
-          <h3>Review submitted — thank you! 🙌</h3>
+          <h3>Review submitted, thank you! 🙌</h3>
           <p>Your review will appear here shortly. We genuinely appreciate your feedback.</p>
         </div>
       </div>
@@ -2297,24 +2257,24 @@
       <div class="reveal" style="text-align:center;">
         <div class="section-label" style="margin-left:auto;margin-right:auto;justify-content:center;">FAQ</div>
         <h2 class="section-title">Questions you're probably asking</h2>
-        <p class="section-sub" style="margin-left:auto;margin-right:auto;">Quick answers. If you don't see yours, just ask on the audit call — it's free.</p>
+        <p class="section-sub" style="margin-left:auto;margin-right:auto;">Quick answers. If you don't see yours, just ask on the audit call, it's free.</p>
       </div>
       <div class="faq-grid">
         <div class="faq-item reveal">
           <button class="faq-q" type="button">How long does it take to go live?<span class="chev">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">Most systems are live in <strong>7–14 days</strong> from the audit call. Simple chatbots can ship in 3–5 days. We move fast — no bloated discovery phases, no months of "alignment workshops."</div></div>
+          <div class="faq-a"><div class="faq-a-inner">Most systems are live in <strong>7–14 days</strong> from the audit call. Simple chatbots can ship in 3–5 days. We move fast, no bloated discovery phases, no months of "alignment workshops."</div></div>
         </div>
         <div class="faq-item reveal">
           <button class="faq-q" type="button">Do I need to use GoHighLevel?<span class="chev">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">No. We build on the stack you already use — GoHighLevel, Make.com, n8n, HubSpot, Pipedrive, or custom APIs. We recommend tools only when they save you money. Your data, your accounts, always.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">No. We build on the stack you already use, GoHighLevel, Make.com, n8n, HubSpot, Pipedrive, or custom APIs. We recommend tools only when they save you money. Your data, your accounts, always.</div></div>
         </div>
         <div class="faq-item reveal">
           <button class="faq-q" type="button">How much does it cost?<span class="chev">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">Most projects fall between <strong>$1,500–$8,000</strong> one-time build plus a small monthly retainer for hosting, AI usage, and ongoing tuning. The free audit gives you an exact quote — no surprises, no upsell scripts.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">Focused builds like an AI receptionist start around <strong>$800</strong> setup plus a small monthly retainer for hosting, AI usage, and ongoing tuning. Larger multi-system projects run <strong>$1,500–$8,000</strong>. The free audit gives you an exact quote, no surprises, no upsell scripts.</div></div>
         </div>
         <div class="faq-item reveal">
           <button class="faq-q" type="button">Who owns the system after it's built?<span class="chev">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">You do — fully. Every account is in your name, every workflow is documented, and you can walk away at any time with the keys. No lock-in. No "agency tax" to leave.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">You do, fully. Every account is in your name, every workflow is documented, and you can walk away at any time with the keys. No lock-in. No "agency tax" to leave.</div></div>
         </div>
         <div class="faq-item reveal">
           <button class="faq-q" type="button">What industries do you work with?<span class="chev">+</span></button>
@@ -2322,11 +2282,11 @@
         </div>
         <div class="faq-item reveal">
           <button class="faq-q" type="button">Will the AI sound like a robot?<span class="chev">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">No. We hand-tune voice, tone, and brand language to match how <em>you</em> already speak to clients. We test conversations until it sounds like your best team member on their best day — every day.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">No. We hand-tune voice, tone, and brand language to match how <em>you</em> already speak to clients. We test conversations until it sounds like your best team member on their best day, every day.</div></div>
         </div>
         <div class="faq-item reveal">
           <button class="faq-q" type="button">What if my business is too small?<span class="chev">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">If anything, small businesses see the biggest lift. One missed lead a day is the difference between paying rent and not. Our smallest builds start at chatbot + booking only — affordable, fast, and immediately profitable.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">If anything, small businesses see the biggest lift. One missed lead a day is the difference between paying rent and not. Our smallest builds start at chatbot + booking only, affordable, fast, and immediately profitable.</div></div>
         </div>
       </div>
     </div>
@@ -2342,7 +2302,7 @@
           <p class="section-sub">A free 30-minute call. We map your workflows, find the highest-leverage automations, and quote it on the spot.</p>
           <ul class="calendar-bullets">
             <li>No slides. No fluff. Just where AI can save you time and money.</li>
-            <li>You leave with a clear plan — even if you never hire us.</li>
+            <li>You leave with a clear plan, even if you never hire us.</li>
             <li>If we're a fit, you'll have a quote before the call ends.</li>
             <li>Zero pressure. Zero sales script. Real builder, real talk.</li>
           </ul>
@@ -2371,16 +2331,16 @@
           <h2 class="founder-name">Drew Neros</h2>
           <div class="founder-role">Founder of InRealms · Sydney 🇦🇺</div>
           <p class="founder-bio">
-            I started InRealms because I kept seeing brilliant business owners drowning in admin —
+            I started InRealms because I kept seeing brilliant business owners drowning in admin,
             missed calls, unanswered DMs, leads slipping through the cracks. I build AI receptionists,
             workflows, and websites that quietly run in the background, so the people I work with can
             focus on the part of their business they actually love. Every system I deliver is
-            hand-built for how <em>your</em> business runs — no copy-paste templates, no fluff.
+            hand-built for how <em>your</em> business runs, no copy-paste templates, no fluff.
           </p>
           <div class="founder-meta">
             <div class="founder-meta-item"><span class="dot-c"></span> Based in Sydney, working globally</div>
             <div class="founder-meta-item"><span class="dot-c"></span> 4+ years building automation systems</div>
-            <div class="founder-meta-item"><span class="dot-c"></span> Personal builds only — no agency overhead</div>
+            <div class="founder-meta-item"><span class="dot-c"></span> Personal builds only, no agency overhead</div>
           </div>
         </div>
       </div>
@@ -2653,28 +2613,6 @@
         }
       });
     });
-
-    // ─── LIVE TOASTS (social proof) ───
-    const toastMessages = [
-      { name: 'Sarah', city: 'London', action: 'just booked a free audit' },
-      { name: 'Marcus', city: 'Sydney', action: 'just launched their AI receptionist' },
-      { name: 'Elena', city: 'Madrid', action: 'just connected their CRM' },
-      { name: 'James', city: 'Sydney', action: 'just booked a discovery call' },
-      { name: 'Priya', city: 'Singapore', action: 'just went live with WhatsApp AI' },
-      { name: 'Tom', city: 'Toronto', action: 'just automated their follow-ups' }
-    ];
-    const toast = document.getElementById('live-toast');
-    const ltText = document.getElementById('lt-text');
-    let toastIdx = 0;
-    function showToast() {
-      const m = toastMessages[toastIdx % toastMessages.length];
-      ltText.innerHTML = `<strong>${m.name}</strong> in ${m.city} ${m.action}`;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 4500);
-      toastIdx++;
-    }
-    setTimeout(showToast, 5500);
-    setInterval(showToast, 14000);
 
     // ─── FLOW NODE ANIMATION ───
     const flowNodes = document.querySelectorAll('.flow-node');
