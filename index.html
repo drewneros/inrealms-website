@@ -400,6 +400,12 @@
       flex-wrap: wrap;
     }
 
+    .hero-note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
     .btn-primary {
       background: var(--grad);
       color: white;
@@ -1456,6 +1462,29 @@
     .footer-contact a { font-size: 13px; color: var(--gray); text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; transition: color 0.2s, border-color 0.2s; }
     .footer-contact a:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
 
+    /* ─── MOBILE STICKY CTA ─── */
+    .mobile-sticky-cta {
+      display: none;
+    }
+    @media (max-width: 960px) {
+      .mobile-sticky-cta {
+        display: block;
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        z-index: 150;
+        padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+        background: rgba(3,8,15,0.9);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border);
+      }
+      .mobile-sticky-cta .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+      body { padding-bottom: 64px; }
+    }
+
     /* ─── SCROLL REVEAL ─── */
     .reveal {
       opacity: 0;
@@ -1835,7 +1864,7 @@
         </p>
         <div class="hero-actions">
           <a href="https://tally.so/r/mVk1JE" target="_blank" rel="noopener" class="btn-primary">
-            Get a Free Audit
+            Get My Free Audit
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="#services" class="btn-ghost">
@@ -1843,6 +1872,7 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#8B9DC3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
+        <p class="hero-note">No sales script. No pressure. Just your plan, in 30 minutes.</p>
       </div>
       <div class="hero-visual">
         <div class="ai-figure-wrap">
@@ -2355,13 +2385,14 @@
         <p class="cta-sub">Book a free 30-minute audit. We'll map exactly what to automate and how much time it'll save you.</p>
         <div class="cta-actions">
           <button type="button" onclick="openBooking()" class="btn-primary">
-            Book Free Audit
+            Book My Free Audit
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <a href="https://tally.so/r/mVk1JE" target="_blank" rel="noopener" class="btn-ghost">
             Map out my system →
           </a>
         </div>
+        <p class="hero-note" style="margin-top:20px;">No slides. No lock-in. Cancel anytime, keep everything we built.</p>
       </div>
     </div>
   </section>
@@ -2391,6 +2422,11 @@
     </div>
     <div class="footer-copy">© 2026 InRealms · Sydney, AU · All rights reserved.</div>
   </footer>
+
+  <!-- MOBILE STICKY CTA -->
+  <div class="mobile-sticky-cta">
+    <button type="button" class="btn-primary" onclick="openBooking()">Get My Free Audit</button>
+  </div>
 
   <!-- BOOKING MODAL -->
   <div class="modal-overlay" id="booking-modal" onclick="if(event.target===this)closeBooking()">
