@@ -1784,6 +1784,32 @@
     /* ─── COUNTER ─── */
     .metric-value[data-target] { transition: none; }
 
+    /* ─── STICKY MOBILE CTA ─── */
+    .mobile-sticky-cta {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .mobile-sticky-cta {
+        display: block;
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        z-index: 999;
+        text-align: center;
+        padding: 16px;
+        border-radius: 14px;
+        background: var(--grad);
+        color: #F0F4FF;
+        font-size: 15px;
+        font-weight: 500;
+        border: none;
+        width: calc(100% - 32px);
+        box-shadow: 0 8px 30px rgba(37,99,235,0.4);
+      }
+      body { padding-bottom: 76px; }
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 960px) {
       nav { padding: 18px 24px; }
@@ -1839,7 +1865,7 @@
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#calendar">Book</a></li>
     </ul>
-    <button class="nav-cta" type="button" onclick="openBooking()">Book a Call</button>
+    <button class="nav-cta" type="button" onclick="openBooking()">Get My Free Plan</button>
   </nav>
 
   <!-- HERO -->
@@ -1862,9 +1888,12 @@
           seconds, qualify leads, and fill your calendar, 24/7,
           across every channel, while you focus on the work that matters.
         </p>
+        <p class="hero-sub" style="margin-top:12px; font-weight:500; color:var(--white);">
+          One founder builds your system, not a rotating account team. You talk to the person who ships it.
+        </p>
         <div class="hero-actions">
           <a href="https://tally.so/r/mVk1JE" target="_blank" rel="noopener" class="btn-primary">
-            Get My Free Audit
+            Get My Free Plan
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="#services" class="btn-ghost">
@@ -2033,7 +2062,7 @@
   <section id="process">
     <div class="container">
       <div class="reveal">
-        <div class="section-label">How It Works</div>
+        <div class="section-label">Live in Days</div>
         <h2 class="section-title">From call to running system<br>in days, not months</h2>
         <p class="section-sub">We move fast. No bloated discovery phases, just a clear process that gets your automation live quickly.</p>
       </div>
@@ -2174,7 +2203,7 @@
   <section id="reviews">
     <div class="container">
       <div class="reveal">
-        <div class="section-label">Reviews</div>
+        <div class="section-label">Client Proof</div>
         <h2 class="section-title">What our clients say</h2>
         <p class="section-sub">Real results from real businesses. The automation speaks for itself.</p>
       </div>
@@ -2573,7 +2602,7 @@
     renderStoredReviews();
 
     // ─── BOOKING MODAL ───
-    const BOOKING_URL = 'https://api.leadconnectorhq.com/widget/otl/ZCBAA9bXd?slug=inrealms-discovery-call';
+    const BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/mjnDWooafoxdJ0pIueQF';
     function openBooking() {
       const modal = document.getElementById('booking-modal');
       const iframe = document.getElementById('booking-iframe');
@@ -2658,5 +2687,7 @@
       activeIndex = (activeIndex + 1) % flowNodes.length;
     }, 1800);
   </script>
+
+  <button class="mobile-sticky-cta" type="button" onclick="openBooking()">Get My Free Plan</button>
 </body>
 </html>
