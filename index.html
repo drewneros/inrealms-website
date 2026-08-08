@@ -574,19 +574,19 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       overflow: hidden;
-      padding: 14px 0;
+      padding: 14px 24px;
       position: relative;
     }
     .ticker-inner {
       display: flex;
-      animation: ticker 25s linear infinite;
-      width: max-content;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     .ticker-item {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 0 50px;
+      padding: 6px 24px;
       font-size: 13px;
       color: var(--gray);
       white-space: nowrap;
@@ -596,10 +596,6 @@
       width: 4px; height: 4px;
       border-radius: 50%;
       background: var(--blue);
-    }
-    @keyframes ticker {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
     }
 
     /* ─── SECTIONS ─── */
@@ -1628,18 +1624,6 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--blue), var(--purple), transparent);
     }
-    .compare-tag {
-      display: inline-block;
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 100px;
-      margin-bottom: 16px;
-      font-weight: 600;
-    }
-    .compare-col.without .compare-tag { background: rgba(236,72,153,0.10); color: #FCA5C9; border: 1px solid rgba(236,72,153,0.2); }
-    .compare-col.with .compare-tag { background: rgba(34,211,238,0.10); color: #67E8F9; border: 1px solid rgba(34,211,238,0.2); }
     .compare-title {
       font-size: 24px;
       font-weight: 600;
@@ -1956,15 +1940,6 @@
       <div class="ticker-item"><span class="sep"></span> CRM Pipelines</div>
       <div class="ticker-item"><span class="sep"></span> Follow-Up Sequences</div>
       <div class="ticker-item"><span class="sep"></span> Custom Web Development</div>
-      <!-- Duplicate for loop -->
-      <div class="ticker-item"><span class="sep"></span> AI Receptionists &amp; Chatbots</div>
-      <div class="ticker-item"><span class="sep"></span> GoHighLevel Workflows</div>
-      <div class="ticker-item"><span class="sep"></span> Lead Generation Systems</div>
-      <div class="ticker-item"><span class="sep"></span> Missed-Call Text-Back</div>
-      <div class="ticker-item"><span class="sep"></span> Booking Automation</div>
-      <div class="ticker-item"><span class="sep"></span> CRM Pipelines</div>
-      <div class="ticker-item"><span class="sep"></span> Follow-Up Sequences</div>
-      <div class="ticker-item"><span class="sep"></span> Custom Web Development</div>
     </div>
   </div>
 
@@ -2130,7 +2105,6 @@
       </div>
       <div class="compare-grid">
         <div class="compare-col without reveal reveal-delay-1">
-          <div class="compare-tag">Without Automation</div>
           <h3 class="compare-title">Leads slip through the cracks</h3>
           <ul class="compare-list">
             <li><span class="ic">✕</span> Inbound leads wait hours for a reply, most never come back</li>
@@ -2142,7 +2116,6 @@
           </ul>
         </div>
         <div class="compare-col with reveal reveal-delay-2">
-          <div class="compare-tag">With InRealms</div>
           <h3 class="compare-title">Every lead is captured &amp; booked</h3>
           <ul class="compare-list">
             <li><span class="ic">✓</span> AI replies in under 60 seconds, day or night, in any language</li>
