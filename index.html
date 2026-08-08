@@ -308,17 +308,6 @@
       overflow: hidden;
     }
 
-    .hero-grid-bg {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px);
-      background-size: 64px 64px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
-    }
-
     .hero-glow-1 {
       position: absolute;
       width: 700px; height: 700px;
@@ -552,7 +541,7 @@
       border: 1px solid rgba(37,99,235,0.4);
       border-radius: 8px;
       padding: 8px 12px;
-      font-size: 11px;
+      font-size: 12px;
       color: #93C5FD;
       font-weight: 500;
       letter-spacing: 0.5px;
@@ -810,7 +799,7 @@
       gap: 8px;
     }
     .tag {
-      font-size: 11px;
+      font-size: 12px;
       padding: 4px 10px;
       border-radius: 100px;
       border: 1px solid var(--border);
@@ -902,7 +891,7 @@
     }
 
     .flow-header {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--gray);
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -941,7 +930,7 @@
 
     .flow-info { flex: 1; }
     .flow-name { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 2px; }
-    .flow-detail { font-size: 11px; color: var(--gray); }
+    .flow-detail { font-size: 12px; color: var(--gray); }
     .flow-status {
       width: 6px; height: 6px;
       border-radius: 50%;
@@ -1273,16 +1262,6 @@
     }
     .founder-photo:hover img { transform: scale(1.04); }
 
-    .founder-glow {
-      position: absolute;
-      width: 420px; height: 420px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 70%);
-      top: -50px; left: -50px;
-      pointer-events: none;
-      z-index: -1;
-      animation: floatGlow 9s ease-in-out infinite;
-    }
     .founder-label {
       font-size: 12px;
       font-weight: 500;
@@ -1523,21 +1502,6 @@
     .reveal-delay-3 { transition-delay: 0.3s; }
     .reveal-delay-4 { transition-delay: 0.4s; }
 
-    /* ─── CURSOR GLOW ─── */
-    .cursor-glow {
-      position: fixed;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(37,99,235,0.10) 0%, rgba(124,58,237,0.06) 35%, transparent 70%);
-      pointer-events: none;
-      z-index: 1;
-      transform: translate(-50%, -50%);
-      transition: opacity 0.3s;
-      mix-blend-mode: screen;
-      will-change: transform;
-    }
-    @media (hover: none) { .cursor-glow { display: none; } }
-
     /* ─── TECH STACK BAR ─── */
     #tech-stack {
       padding: 64px 0 32px;
@@ -1545,9 +1509,8 @@
     }
     .tech-label {
       text-align: center;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.3px;
       color: var(--gray);
       margin-bottom: 32px;
       font-weight: 500;
@@ -1845,7 +1808,6 @@
       .calendar-inner { grid-template-columns: 1fr; gap: 32px; }
       .calendar-embed { min-height: 560px; }
       .calendar-embed iframe { min-height: 560px; }
-      .cursor-glow { display: none; }
       .metric-grid { grid-template-columns: 1fr 1fr; }
       .founder-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
       .founder-photo { width: 240px; height: 240px; margin: 0 auto; }
@@ -1858,9 +1820,6 @@
   </style>
 </head>
 <body>
-
-  <!-- CURSOR GLOW -->
-  <div class="cursor-glow" id="cursor-glow"></div>
 
   <!-- NAV -->
   <nav id="navbar">
@@ -1880,7 +1839,6 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-grid-bg"></div>
     <div class="hero-glow-1"></div>
     <div class="hero-glow-2"></div>
     <div class="hero-inner">
@@ -1911,7 +1869,7 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#8B9DC3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
-        <p class="hero-note">No sales script. No pressure. Just your plan, in 30 minutes.</p>
+        <p class="hero-note">No sales script, no pressure, just your plan in 30 minutes.</p>
       </div>
       <div class="hero-visual">
         <div class="ai-figure-wrap">
@@ -2073,7 +2031,7 @@
       <div class="reveal">
         <div class="section-label">Live in Days</div>
         <h2 class="section-title">From call to running system<br>in days, not months</h2>
-        <p class="section-sub">We move fast. No bloated discovery phases, just a clear process that gets your automation live quickly.</p>
+        <p class="section-sub">We move fast, skipping bloated discovery phases for a clear process that gets your automation live quickly.</p>
       </div>
       <div class="process-steps">
         <div class="process-step reveal reveal-delay-1">
@@ -2340,7 +2298,7 @@
         </div>
         <div class="faq-item reveal">
           <button class="faq-q" type="button">Who owns the system after it's built?<span class="chev">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">You do, fully. Every account is in your name, every workflow is documented, and you can walk away at any time with the keys. No lock-in. No "agency tax" to leave.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">You do, fully. Every account is in your name, every workflow is documented, and you can walk away at any time with the keys, no lock-in, no "agency tax" to leave.</div></div>
         </div>
         <div class="faq-item reveal">
           <button class="faq-q" type="button">What industries do you work with?<span class="chev">+</span></button>
@@ -2367,7 +2325,7 @@
           <h2 class="section-title">Pick a time.<br>We'll do the rest.</h2>
           <p class="section-sub">A free 30-minute call. We map your workflows, find the highest-leverage automations, and quote it on the spot.</p>
           <ul class="calendar-bullets">
-            <li>No slides. No fluff. Just where AI can save you time and money.</li>
+            <li>No slides, no fluff, just where AI can save you time and money.</li>
             <li>You leave with a clear plan, even if you never hire us.</li>
             <li>If we're a fit, you'll have a quote before the call ends.</li>
             <li>Zero pressure. Zero sales script. Real builder, real talk.</li>
@@ -2389,7 +2347,6 @@
     <div class="container">
       <div class="founder-inner reveal">
         <div class="founder-photo">
-          <div class="founder-glow"></div>
           <img src="founder.jpg" alt="Drew Neros, Founder of InRealms" loading="lazy" />
         </div>
         <div>
@@ -2434,7 +2391,7 @@
             Map out my system →
           </a>
         </div>
-        <p class="hero-note" style="margin-top:20px;">No slides. No lock-in. Cancel anytime, keep everything we built.</p>
+        <p class="hero-note" style="margin-top:20px;">No slides, no lock-in, cancel anytime and keep everything we built.</p>
       </div>
     </div>
   </section>
@@ -2644,22 +2601,6 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeBooking();
     });
-
-    // ─── CURSOR GLOW ───
-    const glow = document.getElementById('cursor-glow');
-    let glowX = window.innerWidth / 2, glowY = window.innerHeight / 2;
-    let targetX = glowX, targetY = glowY;
-    window.addEventListener('mousemove', (e) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-    }, { passive: true });
-    function animateGlow() {
-      glowX += (targetX - glowX) * 0.08;
-      glowY += (targetY - glowY) * 0.08;
-      if (glow) glow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
-      requestAnimationFrame(animateGlow);
-    }
-    animateGlow();
 
     // ─── ANIMATED COUNTERS ───
     const counterObserver = new IntersectionObserver((entries) => {
