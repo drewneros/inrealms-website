@@ -1782,31 +1782,6 @@
     /* ─── COUNTER ─── */
     .metric-value[data-target] { transition: none; }
 
-    /* ─── STICKY MOBILE CTA ─── */
-    .mobile-sticky-cta {
-      display: none;
-    }
-    @media (max-width: 768px) {
-      .mobile-sticky-cta {
-        display: block;
-        position: fixed;
-        left: 16px;
-        right: 16px;
-        bottom: 16px;
-        z-index: 999;
-        text-align: center;
-        padding: 16px;
-        border-radius: 14px;
-        background: var(--grad);
-        color: #F0F4FF;
-        font-size: 15px;
-        font-weight: 500;
-        border: none;
-        box-shadow: 0 8px 30px rgba(37,99,235,0.4);
-      }
-      body { padding-bottom: 76px; }
-    }
-
     /* ─── RESPONSIVE ─── */
     @media (max-width: 960px) {
       nav { padding: 18px 24px; }
@@ -2686,6 +2661,5 @@
     }, 1800);
   </script>
 
-  <button class="mobile-sticky-cta" type="button" onclick="openBooking()">Get My Free Plan</button>
 </body>
 </html>
