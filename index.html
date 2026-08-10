@@ -1365,6 +1365,30 @@
       transition: background 0.2s;
     }
     .modal-close:hover { background: rgba(255,255,255,0.16); }
+    .modal-skeleton {
+      position: absolute;
+      inset: 0;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      z-index: 1;
+    }
+    .modal-skeleton div {
+      border-radius: 8px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.09) 50%, rgba(255,255,255,0.04) 75%);
+      background-size: 200% 100%;
+      animation: skeletonShimmer 1.4s linear infinite;
+    }
+    .modal-skeleton .sk-title { width: 55%; height: 28px; }
+    .modal-skeleton .sk-line { width: 80%; height: 14px; }
+    .modal-skeleton .sk-line.short { width: 40%; }
+    .modal-skeleton .sk-grid { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 8px; }
+    .modal-skeleton .sk-cell { height: 44px; }
+    @keyframes skeletonShimmer { to { background-position: -200% 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .modal-skeleton div { animation: none; }
+    }
     .modal-content iframe {
       width: 100%;
       height: 100%;
@@ -2431,7 +2455,15 @@
   <div class="modal-overlay" id="booking-modal" onclick="if(event.target===this)closeBooking()">
     <div class="modal-content">
       <button class="modal-close" type="button" onclick="closeBooking()" aria-label="Close">×</button>
-      <iframe id="booking-iframe" src="" title="Book a discovery call" allow="payment; camera; microphone"></iframe>
+      <div class="modal-skeleton" id="booking-skeleton">
+        <div class="sk-title"></div>
+        <div class="sk-line"></div>
+        <div class="sk-line short"></div>
+        <div class="sk-grid">
+          <div class="sk-cell"></div><div class="sk-cell"></div><div class="sk-cell"></div><div class="sk-cell"></div>
+        </div>
+      </div>
+      <iframe id="booking-iframe" src="" title="Book a discovery call" allow="payment; camera; microphone" onload="document.getElementById('booking-skeleton').style.display='none'"></iframe>
     </div>
   </div>
 
@@ -2587,6 +2619,7 @@
     function openBooking() {
       const modal = document.getElementById('booking-modal');
       const iframe = document.getElementById('booking-iframe');
+      document.getElementById('booking-skeleton').style.display = 'flex';
       iframe.src = BOOKING_URL;
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
