@@ -257,10 +257,12 @@
       height: 44px;
       object-fit: contain;
       filter: drop-shadow(0 0 14px rgba(37,99,235,0.45));
-      transition: transform 0.45s cubic-bezier(.2,.7,.2,1), width 0.3s ease, height 0.3s ease;
+      transform: scale(1);
+      transition: transform 0.3s cubic-bezier(.2,.7,.2,1);
     }
-    .nav-logo:hover img { transform: rotate(45deg); }
-    nav.scrolled .nav-logo img { width: 32px; height: 32px; }
+    .nav-logo:hover img { transform: scale(1) rotate(45deg); }
+    nav.scrolled .nav-logo img { transform: scale(0.727); }
+    nav.scrolled .nav-logo:hover img { transform: scale(0.727) rotate(45deg); }
     nav.scrolled .nav-logo { font-size: 15px; }
 
     .nav-links {
@@ -1767,17 +1769,21 @@
     }
     .faq-item.open .chev { transform: rotate(45deg); background: rgba(37,99,235,0.25); }
     .faq-a {
-      max-height: 0;
+      display: grid;
+      grid-template-rows: 0fr;
       overflow: hidden;
-      transition: max-height 0.35s ease;
+      transition: grid-template-rows 0.35s ease;
     }
+    .faq-a > .faq-a-inner { overflow: hidden; min-height: 0; }
+    .faq-item.open .faq-a { grid-template-rows: 1fr; }
     .faq-a-inner {
-      padding: 0 26px 22px;
+      padding: 0 26px 0;
       font-size: 15px;
       color: var(--gray);
       line-height: 1.7;
       font-weight: 300;
     }
+    .faq-item.open .faq-a-inner { padding-bottom: 22px; }
 
     /* ─── COUNTER ─── */
     .metric-value[data-target] { transition: none; }
@@ -2639,16 +2645,9 @@
     document.querySelectorAll('.faq-q').forEach(btn => {
       btn.addEventListener('click', () => {
         const item = btn.parentElement;
-        const ans = item.querySelector('.faq-a');
         const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(i => {
-          i.classList.remove('open');
-          i.querySelector('.faq-a').style.maxHeight = '0px';
-        });
-        if (!isOpen) {
-          item.classList.add('open');
-          ans.style.maxHeight = ans.scrollHeight + 'px';
-        }
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
       });
     });
 
