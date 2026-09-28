@@ -21,6 +21,11 @@
     Cache-Control = "public, max-age=2592000"
 
 [[redirects]]
+  from = "/work"
+  to = "/work.html"
+  status = 200
+
+[[redirects]]
   from = "/book"
   to = "/#calendar"
   status = 301
