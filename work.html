@@ -170,6 +170,9 @@
     .case-quote { border-top: 1px solid var(--border); padding-top: 24px; margin-bottom: 32px; max-width: 60ch; }
     .case-quote p { font-size: 15px; font-weight: 300; line-height: 1.7; color: var(--soft); margin-bottom: 10px; }
     .case-note { font-size: 15px; font-weight: 300; color: var(--gray); }
+    .case-features { list-style: none; margin-top: 18px; display: flex; flex-direction: column; gap: 7px; }
+    .case-features li { font-size: 13px; color: var(--gray); padding-left: 14px; position: relative; line-height: 1.5; }
+    .case-features li::before { content: '→'; position: absolute; left: 0; color: rgba(139,157,195,0.4); }
     .case-quote cite { font-style: normal; font-size: 13px; color: var(--gray); }
     .case-link {
       display: inline-flex; align-items: center; gap: 10px;
@@ -279,6 +282,12 @@
               <li>Personal brand site</li>
               <li>Built on Readymag</li>
             </ul>
+            <ul class="case-features">
+              <li>Editorial hero: one figure, full-width, heavy white space</li>
+              <li>Board page with individual talent profiles</li>
+              <li>Press section with clippings</li>
+              <li>Full design and build: home, board, press, people he represents</li>
+            </ul>
           </div>
           <div>
             <p class="case-text">A talent manager who is also his own brand. The site reads like an editorial spread: one figure, a lot of white, nothing competing for attention. Full design and build, from the home page to his board, press and the people he represents.</p>
@@ -312,6 +321,12 @@
               <li>Architecture and interiors</li>
               <li>Italy</li>
               <li>Hand-coded site</li>
+            </ul>
+            <ul class="case-features">
+              <li>Giant animated wordmark over silver-foil texture</li>
+              <li>Studio View: full-page gallery that opens in place, no reload</li>
+              <li>Radio Saray: playlist that keeps playing while you browse</li>
+              <li>Phase 1 live: home + studio view. Project archive in progress</li>
             </ul>
           </div>
           <div>
@@ -347,6 +362,12 @@
               <li>Singapore</li>
               <li>Hand-coded site</li>
             </ul>
+            <ul class="case-features">
+              <li>Booking CTA visible above the fold before any scroll</li>
+              <li>Cinematic dark aesthetic: soft-focus backdrop, serif headline</li>
+              <li>Host and talent showcase section with profiles</li>
+              <li>Built for private events and corporate clients in the Singapore market</li>
+            </ul>
           </div>
           <div>
             <p class="case-text">An events company that supplies hosts for private nights. Dark, soft and a little cinematic, with the booking button in the first screen so a planner can act before they scroll.</p>
@@ -381,6 +402,12 @@
               <li>Our own product</li>
               <li>Landing page</li>
             </ul>
+            <ul class="case-features">
+              <li>Live 3D globe in the first screen (Three.js / WebGL)</li>
+              <li>Direct App Store CTA above the fold</li>
+              <li>Email waitlist capture for early access</li>
+              <li>Visa day-tracker for digital nomads who live across borders</li>
+            </ul>
           </div>
           <div>
             <p class="case-text">Our own app. It counts visa days for people who live on the road, so they never overstay. The landing page puts a 3D globe in the first screen and sends people straight to the App Store.</p>
@@ -400,6 +427,9 @@
           <a class="frame frame-desktop" href="https://drewneros.github.io/golden-horde-invite/" target="_blank" rel="noopener" aria-label="Open the Zolotaya Orda Ethno-Park event site in a new tab">
             <img src="media/work-golden-horde.jpg" alt="Zolotaya Orda event invitation site: fire and cultural photo on the left, Russian invitation text on the right" width="1440" height="900" loading="lazy" decoding="async" />
           </a>
+          <div class="frame frame-phone" aria-hidden="true">
+            <img src="portfolio/golden-horde-mobile.webp" alt="Zolotaya Orda event site on a phone" width="390" height="844" loading="lazy" decoding="async" />
+          </div>
         </div>
         <div class="case-body">
           <div>
@@ -408,6 +438,13 @@
               <li>Event invitation</li>
               <li>Irkutsk, Russia</li>
               <li>Hand-coded site</li>
+            </ul>
+            <ul class="case-features">
+              <li>Split-scroll hero: cultural photo left, invitation text right</li>
+              <li>Ambient audio that plays on load (Mongolian theme)</li>
+              <li>RSVP button to external Yandex form</li>
+              <li>Self-hosted fonts: Cormorant Garamond + Source Sans 3</li>
+              <li>Designed and deployed in two days for International Tourism Day</li>
             </ul>
           </div>
           <div>
