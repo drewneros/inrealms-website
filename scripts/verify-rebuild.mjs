@@ -84,8 +84,12 @@ const checks = {
       const errs = [];
       p.on('pageerror', e => errs.push(e.message));
       await p.goto('http://localhost:3460/', { waitUntil: 'load' });
-      const H = await p.evaluate(() => document.documentElement.scrollHeight);
-      for (let y = 0; y < H; y += Math.round(h * 0.6)) { await p.evaluate(v => scrollTo(0, v), y); await p.waitForTimeout(60); }
+      // the site uses scroll-behavior: smooth; jump instead so positions are final when read
+      await p.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; });
+      // re-read the height every step: the pinned gallery resizes the page after load
+      for (let y = 0; y <= await p.evaluate(() => document.documentElement.scrollHeight - innerHeight) + h; y += Math.round(h * 0.6)) {
+        await p.evaluate(v => scrollTo(0, v), y); await p.waitForTimeout(60);
+      }
       await p.waitForTimeout(900);
       const r = await p.evaluate(() => {
         const W = innerWidth;
