@@ -915,6 +915,14 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      /* no pinning without motion: the gallery is a plain list at every width */
+      .work-stage { position: static; height: auto; display: block; overflow: visible; padding: var(--rs-pad) 0; }
+      .work-track { flex-direction: column; align-items: stretch; transform: none !important; gap: 48px; }
+      .work-intro, .work-card { flex: none; width: 100%; max-width: 980px; margin: 0 auto; }
+      .work-card { opacity: 1; transform: none; }
+      .work-frame img { transform: none; filter: none; }
+      .work-go { opacity: 1; transform: none; }
+      .work-progress { display: none; }
       .svc::before, .book-seam { transform: none; transition: none; }
       .steps::after { transform: none; }
       .step { opacity: 1; }
