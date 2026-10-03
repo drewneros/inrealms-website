@@ -42,5 +42,5 @@ Scope: every section below #portal rebuilt in the realm style (services, work, p
 - [x] G8: /code-review run on the diff, serious findings fixed
   EVIDENCE: /code-review medium on 9f92a76~1..HEAD, 1 finding (reduced-motion desktop hid work cards 2-5), fixed in 60c51ff, verified all 5 cards inside 1440px viewport
 
-- [ ] G9: Drew watched the recorded video of the full page
-  EVIDENCE: pending
+- [x] G9: Drew watched the recorded video of the full page
+  EVIDENCE: Drew in chat 3 Oct 2026: "ok watched it, merge and deploy"

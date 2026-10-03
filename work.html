@@ -251,9 +251,9 @@
       <li><a href="/work" aria-current="page">Work</a></li>
       <li><a href="/#process">Process</a></li>
       <li><a href="/#faq">FAQ</a></li>
-      <li><a href="/#calendar">Book</a></li>
+      <li><a href="/#book">Contact</a></li>
     </ul>
-    <a class="nav-cta" href="/#calendar">Book a call</a>
+    <a class="nav-cta" href="mailto:hello@inrealms.com?subject=Website%20enquiry">Get in touch</a>
   </nav>
 
   <main>
@@ -467,7 +467,7 @@
       <div class="close">
         <h2>Want one like this?</h2>
         <p>Tell us what you do. You talk to the person who builds it, from the first call to launch.</p>
-        <a class="btn-primary" href="/#calendar">Book a call</a>
+        <a class="btn-primary" href="mailto:hello@inrealms.com?subject=Website%20enquiry">Email me</a>
       </div>
     </section>
   </main>
@@ -513,12 +513,12 @@
     }, { threshold: 0.2 });
     document.querySelectorAll('.case-media').forEach((el) => mediaObserver.observe(el));
 
-    // GA4: which client sites people open, and who heads off to book a call.
+    // GA4: which client sites people open, and who emails.
     document.addEventListener('click', (e) => {
       if (typeof gtag !== 'function') return;
       const visit = e.target.closest('.case a[target="_blank"]');
       if (visit) gtag('event', 'select_content', { content_type: 'portfolio_site', item_id: visit.closest('.case').id });
-      if (e.target.closest('a[href="/#calendar"]')) gtag('event', 'book_call_click', { page: 'work' });
+      if (e.target.closest('a[href^="mailto:"]')) gtag('event', 'generate_lead', { method: 'email', page: 'work' });
     });
   </script>
 </body>
