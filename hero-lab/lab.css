@@ -1,0 +1,131 @@
+/* Hero lab. Shared tokens for the four hero options.
+   Inherited from index.html :root, plus the proposed type scale and grid. */
+@font-face { font-family: 'NeueMontreal'; src: url('../fonts/NeueMontreal-Light.otf') format('opentype'); font-weight: 300; }
+@font-face { font-family: 'NeueMontreal'; src: url('../fonts/NeueMontreal-Regular.otf') format('opentype'); font-weight: 400; }
+@font-face { font-family: 'NeueMontreal'; src: url('../fonts/NeueMontreal-Medium.otf') format('opentype'); font-weight: 500; }
+@font-face { font-family: 'InstrumentSerif'; src: url('../fonts/InstrumentSerif-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+
+:root {
+  --bg: #07080C;
+  --bg-2: #0C0E14;
+  --white: #EDEFF5;
+  --gray: #8A8F9C;
+  --signal: #2563EB;
+  --spectra: #22D3EE;
+  --deep: #7C3AED;
+  --border: rgba(255,255,255,0.07);
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-glide: cubic-bezier(0.19, 1, 0.22, 1);
+  --font-display: 'InstrumentSerif', Georgia, serif;
+  --font-body: 'NeueMontreal', 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+
+  --gutter: clamp(16px, 5vw, 80px);
+  --t-label: 12px;
+  --t-body: 17px;
+  --t-title: clamp(36px, 4.5vw, 64px);
+  --t-hero: clamp(56px, 10vw, 160px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.55;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+/* Minimal nav, same in every option so only the hero is judged. */
+.lab-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px var(--gutter);
+  mix-blend-mode: difference;
+}
+.lab-nav .logo { display: flex; align-items: center; gap: 10px; font-weight: 500; letter-spacing: 0.02em; }
+.lab-nav .logo img { width: 22px; height: 22px; }
+.lab-nav .links { display: flex; gap: 32px; font-size: 14px; color: rgba(237,239,245,0.7); }
+.lab-nav .cta {
+  font-size: 14px; padding: 10px 20px; border-radius: 9999px;
+  border: 1px solid rgba(237,239,245,0.4);
+}
+@media (max-width: 768px) { .lab-nav .links { display: none; } }
+
+/* HUD: mono labels, the "instrument panel" layer. */
+.hud {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(237,239,245,0.55);
+}
+.hud b { color: var(--spectra); font-weight: 400; }
+
+.h-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--t-hero);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+.h-hero em { font-style: italic; color: var(--spectra); }
+.sub {
+  max-width: 34ch;
+  color: rgba(237,239,245,0.72);
+  font-size: var(--t-body);
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 26px; border-radius: 9999px;
+  background: var(--white); color: var(--bg);
+  font-weight: 500; font-size: 15px;
+  transition: transform 0.4s var(--ease-out-strong), background 0.3s;
+}
+.btn:hover { transform: translateY(-2px); background: #fff; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 4px; font-size: 15px; color: rgba(237,239,245,0.75);
+  border-bottom: 1px solid rgba(237,239,245,0.2);
+}
+
+/* Placeholder for what comes after, so the scroll exit can be judged. */
+.after {
+  min-height: 100svh;
+  display: grid; place-items: center;
+  padding: var(--gutter);
+  background: var(--bg);
+  text-align: center;
+}
+.after p { font-family: var(--font-display); font-size: var(--t-title); line-height: 1.05; max-width: 18ch; }
+
+/* Option switcher */
+.lab-switch {
+  position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+  z-index: 60; display: flex; gap: 4px; padding: 5px;
+  background: rgba(12,14,20,0.8); backdrop-filter: blur(12px);
+  border: 1px solid var(--border); border-radius: 9999px;
+  font-family: var(--font-mono); font-size: 12px;
+}
+.lab-switch a { padding: 8px 14px; border-radius: 9999px; color: var(--gray); }
+.lab-switch a.on { background: var(--white); color: var(--bg); }
+
+.grain {
+  position: fixed; inset: -50%; z-index: 40; pointer-events: none; opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1s steps(6) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0,0); } 20% { transform: translate(-3%,2%); }
+  40% { transform: translate(2%,-3%); } 60% { transform: translate(-2%,-1%); }
+  80% { transform: translate(3%,3%); } 100% { transform: translate(0,0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain { animation: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}

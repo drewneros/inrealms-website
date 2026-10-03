@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero A · The Film</title>
+<link rel="stylesheet" href="lab.css">
+<style>
+  /* A. The film you liked, now with an instrument layer and a scroll-driven fall toward Earth. */
+  #a { height: 320svh; position: relative; }
+  .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--bg); }
+
+  .media {
+    position: absolute; inset: -4%;
+    transform-origin: 50% 22%;
+    transform:
+      translate3d(calc(var(--mx, 0) * -14px), calc(var(--my, 0) * -10px), 0)
+      scale(calc(1 + var(--p, 0) * var(--p, 0) * 1.7));
+    opacity: clamp(0, calc((0.92 - var(--p, 0)) / 0.62), 1);
+    will-change: transform, opacity;
+  }
+  .media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vignette {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 45%, transparent 40%, rgba(7,8,12,0.75) 100%),
+      linear-gradient(to bottom, rgba(7,8,12,0.5) 0%, transparent 25%, transparent 60%, var(--bg) 100%);
+  }
+
+  /* Four corner readouts, like a viewfinder. */
+  .corner { position: absolute; z-index: 5; display: grid; gap: 6px; }
+  .tl { top: 92px; left: var(--gutter); }
+  .tr { top: 92px; right: var(--gutter); text-align: right; }
+  .bl { bottom: 36px; left: var(--gutter); }
+  .br { bottom: 36px; right: var(--gutter); text-align: right; }
+  .frame { position: absolute; inset: 80px var(--gutter) 24px; z-index: 4; pointer-events: none; }
+  .frame i { position: absolute; width: 18px; height: 18px; border-color: rgba(237,239,245,0.35); border-style: solid; }
+  .frame i:nth-child(1) { top: 0; left: 0; border-width: 1px 0 0 1px; }
+  .frame i:nth-child(2) { top: 0; right: 0; border-width: 1px 1px 0 0; }
+  .frame i:nth-child(3) { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+  .frame i:nth-child(4) { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+  .copy {
+    position: absolute; z-index: 6; left: 0; right: 0; top: 36%;
+    padding: 0 var(--gutter);
+    text-align: center;
+    transform: translateY(calc(-50% - var(--p, 0) * 40svh));
+    opacity: clamp(0, calc(1 - var(--p, 0) * 3), 1);
+  }
+  .copy .hud { margin-bottom: 22px; }
+  .copy .h-hero { text-shadow: 0 2px 40px rgba(7,8,12,0.5); }
+
+  /* Second beat: the offer arrives as the planet falls away. */
+  .beat {
+    position: absolute; z-index: 6; left: var(--gutter); right: var(--gutter); bottom: 14svh;
+    display: grid; gap: 28px; max-width: 560px;
+    opacity: clamp(0, calc((var(--p, 0) - 0.45) * 4), 1);
+    transform: translateY(calc((1 - clamp(0, calc((var(--p, 0) - 0.45) * 4), 1)) * 40px));
+  }
+  .beat .actions { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+
+  .distance { font-variant-numeric: tabular-nums; }
+  .scan {
+    position: absolute; left: 0; right: 0; height: 1px; z-index: 5; pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(34,211,238,0.5), transparent);
+    animation: scan 6s var(--ease-glide) infinite;
+  }
+  @keyframes scan { 0% { top: 12%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { top: 92%; opacity: 0; } }
+  @media (max-width: 768px) { .tr, .br { display: none; } .media { transform-origin: 50% 18%; } }
+</style>
+</head>
+<body>
+<nav class="lab-nav">
+  <a class="logo" href="#"><img src="../logo.png" alt="">InRealms</a>
+  <div class="links"><a>Work</a><a>Services</a><a>Process</a></div>
+  <a class="cta">Book a call</a>
+</nav>
+
+<section id="a">
+  <div class="stage">
+    <div class="media">
+      <video autoplay muted loop playsinline preload="auto" poster="../media/planet-poster.jpg" aria-hidden="true">
+        <source src="../media/planet.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="vignette"></div>
+    <div class="scan"></div>
+    <div class="frame"><i></i><i></i><i></i><i></i></div>
+
+    <div class="corner tl hud"><span>Realm 07</span><span>Observer position</span></div>
+    <div class="corner tr hud"><span>Sydney <b id="clock">--:--:--</b></span><span>33.87° S · 151.21° E</span></div>
+    <div class="corner bl hud"><span>Distance to Earth</span><span class="distance"><b id="dist">384,400</b> km</span></div>
+    <div class="corner br hud"><span>Scroll to descend</span></div>
+
+    <div class="copy">
+      <p class="hud">InRealms · Websites · Automations · Voice</p>
+      <h1 class="h-hero"><span class="scr" data-text="Not from">Not from</span><br><em class="scr" data-text="around here.">around here.</em></h1>
+    </div>
+
+    <div class="beat">
+      <p class="sub" style="max-width:40ch">I build personal websites for Sydney agents. Vendors pick you before they call anyone else, and every enquiry gets a reply in under a minute, day or night.</p>
+      <div class="actions">
+        <a class="btn" href="#">See what yours could look like</a>
+        <a class="btn-ghost" href="#">The work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="after"><p>Next section lands here, already in the same dark.</p></section>
+<div class="grain"></div>
+<nav class="lab-switch"><a class="on" href="a.html">A Film</a><a href="b.html">B Orbit</a><a href="c.html">C Portal</a><a href="d.html">D Dust</a></nav>
+
+<script type="module">
+  import { scrollProgress, scramble, pointer, sydneyClock, reduced } from './lab.js';
+  const sec = document.getElementById('a');
+  const dist = document.getElementById('dist');
+  scrollProgress(sec, p => {
+    dist.textContent = Math.round(384400 * (1 - p * p)).toLocaleString('en-AU');
+  });
+  sydneyClock(document.getElementById('clock'));
+  document.querySelectorAll('.scr').forEach((el, i) => scramble(el, { delay: 400 + i * 450 }));
+  if (!reduced) {
+    const ptr = pointer();
+    const loop = () => { const q = ptr.step(); sec.style.setProperty('--mx', q.x.toFixed(3)); sec.style.setProperty('--my', q.y.toFixed(3)); requestAnimationFrame(loop); };
+    loop();
+  }
+</script>
+</body>
+</html>
