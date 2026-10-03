@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal Openings</title>
+<link rel="stylesheet" href="lab.css">
+<style>
+  /* Four ways for the seam to open. Same scene, same copy, only the opening changes.
+     --s = seam phase (0..1), --o = opening (0..1), both eased in JS. */
+  #c { height: 360svh; position: relative; }
+  .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--bg); }
+  .realm { position: absolute; inset: 0; z-index: 1; }
+  .realm video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .seam {
+    position: absolute; z-index: 3; left: 50%; top: 8%; bottom: 8%; width: 2px; margin-left: -1px;
+    background: linear-gradient(to bottom, transparent, #bff4ff 20%, #fff 50%, #bff4ff 80%, transparent);
+    pointer-events: none;
+  }
+  .bloom {
+    position: absolute; z-index: 0; left: 50%; top: 50%; width: 60vw; height: 120svh;
+    transform: translate(-50%, -50%) scaleX(0.15);
+    background: radial-gradient(ellipse at center, rgba(34,211,238,0.22), rgba(37,99,235,0.08) 35%, transparent 65%);
+    animation: breathe 5s ease-in-out infinite;
+  }
+  @keyframes breathe { 50% { filter: brightness(1.35); } }
+  canvas.motes { position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%; pointer-events: none; }
+
+  .half {
+    position: absolute; z-index: 6; top: 50%;
+    font-family: var(--font-display); font-size: var(--t-hero); line-height: 0.92; letter-spacing: -0.02em; white-space: nowrap;
+    opacity: clamp(0, calc(1 - var(--o, 0) * 2.2), 1);
+  }
+  .half.l { right: calc(50% + 28px); transform: translate(calc(var(--o, 0) * -30vw), -50%); }
+  .half.r { left: calc(50% + 28px); transform: translate(calc(var(--o, 0) * 30vw), -50%); }
+  .half.r em { font-style: italic; color: var(--spectra); }
+  .top { position: absolute; z-index: 6; top: 96px; left: 0; right: 0; text-align: center; opacity: clamp(0, calc(1 - var(--o, 0) * 2), 1); }
+  .hint { position: absolute; z-index: 6; bottom: 70px; left: 0; right: 0; text-align: center; opacity: clamp(0, calc(1 - var(--s, 0) * 3), 1); }
+  .label { position: absolute; z-index: 7; top: 96px; left: var(--gutter); }
+  .shade { position: absolute; inset: 0; z-index: 5; pointer-events: none;
+    background: linear-gradient(to top, rgba(7,8,12,0.95) 0%, rgba(7,8,12,0.7) 38%, transparent 70%);
+    opacity: clamp(0, calc((var(--p, 0) - 0.62) * 4), 1); }
+  .beat {
+    position: absolute; z-index: 6; left: var(--gutter); bottom: 12svh; max-width: 560px; display: grid; gap: 28px;
+    opacity: clamp(0, calc((var(--p, 0) - 0.66) * 4), 1);
+    transform: translateY(calc((1 - clamp(0, calc((var(--p, 0) - 0.66) * 4), 1)) * 40px));
+  }
+  .beat .h-hero { font-size: var(--t-title); line-height: 1.05; }
+  .beat .actions { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+
+  /* ── 1. IRIS: the seam folds into a point of light, the point opens like an eye. ── */
+  [data-v="iris"] .seam { transform: scaleY(calc(1 - var(--s, 0) * 0.985)); filter: brightness(calc(1 + var(--s, 0) * 2)); opacity: clamp(0, calc(1 - var(--o, 0) * 6), 1); }
+  [data-v="iris"] .realm {
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 var(--r, 0vmax), transparent calc(var(--r, 0vmax) + 7vmax));
+            mask-image: radial-gradient(circle at 50% 50%, #000 var(--r, 0vmax), transparent calc(var(--r, 0vmax) + 7vmax));
+    opacity: clamp(0, calc(var(--o, 0) * 20), 1);
+  }
+  [data-v="iris"] .realm video { transform: scale(calc(1.3 - var(--o, 0) * 0.3)); }
+  [data-v="iris"] .ring {
+    position: absolute; z-index: 2; left: 50%; top: 50%; border-radius: 50%; pointer-events: none;
+    width: calc(var(--r, 0vmax) * 2 + 7vmax); aspect-ratio: 1; transform: translate(-50%, -50%);
+    background: radial-gradient(circle, transparent 62%, rgba(191,244,255,0.55) 70%, rgba(34,211,238,0.15) 74%, transparent 80%);
+    opacity: clamp(0, calc((1 - var(--o, 0)) * 1.6), 1);
+  }
+
+  /* ── 2. DOORS: the dark is two heavy doors. Light pours through the seam, then they swing open. ── */
+  [data-v="doors"] .stage { perspective: 1600px; }
+  [data-v="doors"] .realm video { transform: scale(calc(1.25 - var(--o, 0) * 0.25)); }
+  [data-v="doors"] .door {
+    position: absolute; z-index: 2; top: 0; bottom: 0; width: 50%;
+    background: radial-gradient(ellipse at 50% 50%, #0d1018, var(--bg) 70%);
+    backface-visibility: hidden;
+  }
+  [data-v="doors"] .door.l { left: 0; transform-origin: 0 50%; transform: rotateY(calc(var(--o, 0) * -96deg)); }
+  [data-v="doors"] .door.r { right: 0; transform-origin: 100% 50%; transform: rotateY(calc(var(--o, 0) * 96deg)); }
+  [data-v="doors"] .door::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; pointer-events: none; }
+  [data-v="doors"] .door.l::after { right: 0; background: linear-gradient(to left, rgba(191,244,255,calc(0.12 + var(--s, 0) * 0.25)), transparent); }
+  [data-v="doors"] .door.r::after { left: 0; background: linear-gradient(to right, rgba(191,244,255,calc(0.12 + var(--s, 0) * 0.25)), transparent); }
+  [data-v="doors"] .seam { filter: brightness(calc(1 + var(--s, 0) * 2)); width: calc(2px + var(--s, 0) * 10px); margin-left: calc(-1px - var(--s, 0) * 5px); opacity: clamp(0, calc(1 - var(--o, 0) * 4), 1); }
+
+  /* ── 3. LIGHT: the seam floods the screen with white, you come out the other side. ── */
+  [data-v="light"] .seam {
+    width: calc(2px + var(--s, 0) * 30vw); margin-left: calc(-1px - var(--s, 0) * 15vw);
+    top: calc(8% - var(--s, 0) * 20%); bottom: calc(8% - var(--s, 0) * 20%);
+    filter: blur(calc(var(--s, 0) * 40px));
+    background: linear-gradient(to bottom, transparent, #e6fbff 20%, #fff 50%, #e6fbff 80%, transparent);
+    opacity: clamp(0, calc(1 - var(--a, 0) * 3), 1);
+  }
+  [data-v="light"] .flash { position: absolute; inset: 0; z-index: 4; background: #f4fdff; pointer-events: none; opacity: var(--f, 0); }
+  [data-v="light"] .realm { opacity: var(--a, 0); }
+  [data-v="light"] .realm video { transform: scale(calc(1.15 - var(--a, 0) * 0.15)); filter: brightness(calc(1 + (1 - var(--a, 0)) * 1.6)) saturate(calc(0.4 + var(--a, 0) * 0.6)); }
+  [data-v="light"] .half { opacity: clamp(0, calc(1 - var(--s, 0) * 1.6), 1); filter: blur(calc(var(--s, 0) * 8px)); }
+
+  /* ── 4. RIFT: the seam tears like fabric, an uneven glowing edge, drawn live. ── */
+  [data-v="rift"] .realm { opacity: 0; }
+  [data-v="rift"] .seam { opacity: clamp(0, calc(1 - var(--o, 0) * 30), 1); }
+  canvas.rift { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; pointer-events: none; display: none; }
+  [data-v="rift"] canvas.rift { display: block; }
+
+  @media (max-width: 768px) {
+    .half { font-size: clamp(40px, 12vw, 64px); left: 0 !important; right: 0 !important; text-align: center; }
+    .half.l { top: 38%; transform: translate(calc(var(--o,0) * -100vw), -50%); }
+    .half.r { top: 62%; transform: translate(calc(var(--o,0) * 100vw), -50%); }
+  }
+</style>
+</head>
+<body>
+<nav class="lab-nav">
+  <a class="logo" href="#"><img src="../logo.png" alt="">InRealms</a>
+  <div class="links"><a>Work</a><a>Services</a><a>Process</a></div>
+  <a class="cta">Book a call</a>
+</nav>
+
+<section id="c">
+  <div class="stage">
+    <div class="bloom"></div>
+    <div class="realm">
+      <video id="vid" autoplay muted loop playsinline preload="auto" poster="../media/planet-poster.jpg" aria-hidden="true">
+        <source src="../media/planet.mp4" type="video/mp4">
+      </video>
+    </div>
+    <canvas class="rift" id="rift" aria-hidden="true"></canvas>
+    <div class="ring"></div>
+    <div class="door l"></div><div class="door r"></div>
+    <div class="seam"></div>
+    <div class="flash"></div>
+    <div class="shade"></div>
+    <canvas class="motes" id="dust" aria-hidden="true"></canvas>
+
+    <p class="label hud" id="label"></p>
+    <p class="top hud">InRealms · Websites · Automations · Voice</p>
+    <h1>
+      <span class="half l">Not from</span>
+      <span class="half r"><em>around here.</em></span>
+    </h1>
+    <p class="hint hud">Scroll to step through</p>
+
+    <div class="beat">
+      <p class="h-hero">On this side, every enquiry gets an answer.</p>
+      <p class="sub" style="max-width:42ch">I build personal websites for Sydney agents. Vendors pick you before they call anyone else, and every enquiry gets a reply in under a minute, day or night.</p>
+      <div class="actions">
+        <a class="btn" href="#">See what yours could look like</a>
+        <a class="btn-ghost" href="#">The work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="after"><p>Next section lands here, already in the same dark.</p></section>
+<div class="grain"></div>
+<nav class="lab-switch" id="sw">
+  <a href="?v=iris">1 Iris</a><a href="?v=doors">2 Doors</a><a href="?v=light">3 Light</a><a href="?v=rift">4 Rift</a>
+</nav>
+
+<script type="module">
+  import { scrollProgress, reduced } from './lab.js';
+  const NAMES = { iris: '1 · Iris', doors: '2 · Doors', light: '3 · Light', rift: '4 · Rift' };
+  const v = new URLSearchParams(location.search).get('v') || 'iris';
+  document.body.dataset.v = v;
+  document.getElementById('label').textContent = 'Opening ' + NAMES[v];
+  document.querySelectorAll('#sw a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '?v=' + v));
+
+  const sec = document.getElementById('c');
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const inOut = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const out = t => 1 - Math.pow(1 - t, 3);
+  let S = 0, O = 0;
+  scrollProgress(sec, p => {
+    // seam phase 0.04..0.2, opening 0.2..0.62
+    S = out(clamp((p - 0.04) / 0.16));
+    O = inOut(clamp((p - 0.2) / 0.42));
+    const st = sec.style;
+    st.setProperty('--s', S.toFixed(4));
+    st.setProperty('--o', O.toFixed(4));
+    st.setProperty('--r', (O * 95).toFixed(2) + 'vmax');
+    if (v === 'light') {
+      // white peaks around p 0.32, the realm fades in out of the white
+      const f = clamp(1 - Math.abs(p - 0.32) / 0.14);
+      st.setProperty('--f', (f * f * (3 - 2 * f)).toFixed(4));
+      st.setProperty('--a', clamp((p - 0.3) / 0.25).toFixed(4));
+      st.setProperty('--o', clamp((p - 0.2) / 0.2).toFixed(4));
+    }
+  });
+
+  // Rift: a torn, breathing edge drawn around the video each frame.
+  const rc = document.getElementById('rift'), rx = rc.getContext('2d'), vid = document.getElementById('vid');
+  let RW, RH, DPR;
+  const fitR = () => { DPR = Math.min(devicePixelRatio, 2); RW = rc.width = rc.clientWidth * DPR; RH = rc.height = rc.clientHeight * DPR; };
+  addEventListener('resize', fitR); fitR();
+  function riftPath(t) {
+    const cx = RW / 2, cy = RH / 2;
+    const hw = 1.5 * DPR + O * RW * 0.95, hh = RH * (0.42 + S * 0.08 + O * 0.9);
+    const amp = (2 + Math.sin(O * Math.PI) * 26) * DPR;
+    rx.beginPath();
+    for (let i = 0; i <= 220; i++) {
+      const a = (i / 220) * Math.PI * 2;
+      // lens shape: pointed at top and bottom
+      const lens = Math.pow(Math.abs(Math.cos(a)), 0.8);
+      const n = Math.sin(a * 9 + t * 1.3) * 0.5 + Math.sin(a * 23 - t * 2.1) * 0.3 + Math.sin(a * 41 + t * 3.7) * 0.2;
+      const x = cx + Math.cos(a) * (hw * lens + n * amp * lens);
+      const y = cy + Math.sin(a) * hh;
+      i ? rx.lineTo(x, y) : rx.moveTo(x, y);
+    }
+    rx.closePath();
+  }
+  function drawRift(t) {
+    rx.clearRect(0, 0, RW, RH);
+    if (O <= 0.001) return;
+    rx.save(); riftPath(t); rx.clip();
+    const vw = vid.videoWidth || 1280, vh = vid.videoHeight || 720;
+    const sc = Math.max(RW / vw, RH / vh) * (1.25 - O * 0.25);
+    rx.drawImage(vid, (RW - vw * sc) / 2, (RH - vh * sc) / 2, vw * sc, vh * sc);
+    rx.restore();
+    rx.save(); riftPath(t);
+    rx.shadowColor = 'rgba(34,211,238,0.9)'; rx.shadowBlur = 28 * DPR;
+    rx.strokeStyle = `rgba(214,250,255,${0.9 * (1 - O)})`; rx.lineWidth = 2 * DPR; rx.stroke();
+    rx.restore();
+  }
+
+  // Motes leaking out of the seam, fade as it opens.
+  const cv = document.getElementById('dust'), ctx = cv.getContext('2d');
+  let W, H; const motes = [];
+  const fit = () => { const d = Math.min(devicePixelRatio, 2); W = cv.width = cv.clientWidth * d; H = cv.height = cv.clientHeight * d; };
+  addEventListener('resize', fit); fit();
+  const spawn = () => ({ x: W / 2 + (Math.random() - 0.5) * 4, y: H * (0.1 + Math.random() * 0.8), vx: (Math.random() - 0.5) * 1.6, vy: (Math.random() - 0.5) * 0.3, life: 0, max: 120 + Math.random() * 200, r: Math.random() * 1.6 + 0.3 });
+  for (let i = 0; i < 140; i++) { const m = spawn(); m.life = Math.random() * m.max; m.x += m.vx * m.life; motes.push(m); }
+
+  const t0 = performance.now();
+  function tick(now) {
+    const t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    const fade = Math.max(0, 1 - O * 1.6) * (v === 'light' ? 1 - S : 1);
+    if (fade > 0) for (const m of motes) {
+      m.x += m.vx; m.y += m.vy; m.life++;
+      if (m.life > m.max) Object.assign(m, spawn());
+      ctx.fillStyle = `rgba(191,244,255,${Math.sin((m.life / m.max) * Math.PI) * 0.8 * fade})`;
+      ctx.beginPath(); ctx.arc(m.x, m.y, m.r * 2, 0, 6.283); ctx.fill();
+    }
+    if (v === 'rift') drawRift(t);
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+</script>
+</body>
+</html>
