@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero B · Orbit</title>
+<link rel="stylesheet" href="lab.css">
+<style>
+  /* B. Earth built live in Three.js. You stand on the cloud line of another realm. Scroll pulls you across. */
+  #b { height: 320svh; position: relative; }
+  .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: radial-gradient(ellipse at 50% 30%, #0d1230 0%, var(--bg) 70%); }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  .figure {
+    position: absolute; z-index: 3; left: calc(50% + 5vw); bottom: 17svh; width: clamp(18px, 1.8vw, 28px);
+    transform: translateX(-50%) translateY(calc(var(--p, 0) * 30svh));
+    opacity: clamp(0, calc(1 - var(--p, 0) * 2.2), 1);
+    filter: drop-shadow(0 0 12px rgba(34,211,238,0.25));
+  }
+  .copy {
+    position: absolute; z-index: 4; left: var(--gutter); top: 22svh; max-width: 760px;
+    transform: translateY(calc(var(--p, 0) * -30svh));
+    opacity: clamp(0, calc(1 - var(--p, 0) * 3), 1);
+  }
+  .copy .hud { margin-bottom: 24px; }
+  .side {
+    position: absolute; z-index: 4; right: var(--gutter); top: 24svh; text-align: right;
+    display: grid; gap: 8px;
+    opacity: clamp(0, calc(1 - var(--p, 0) * 3), 1);
+  }
+  .beat {
+    position: absolute; z-index: 4; left: 50%; bottom: 16svh; width: min(560px, calc(100% - 32px));
+    text-align: center; display: grid; gap: 28px; justify-items: center;
+    opacity: clamp(0, calc((var(--p, 0) - 0.5) * 4), 1);
+    transform: translateX(-50%) translateY(calc((1 - clamp(0, calc((var(--p, 0) - 0.5) * 4), 1)) * 40px));
+  }
+  .beat .actions { display: flex; gap: 24px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .fade { position: absolute; inset: auto 0 0 0; height: 30svh; z-index: 2; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }
+  @media (max-width: 768px) { .side { display: none; } .copy { top: 16svh; } }
+</style>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }</script>
+</head>
+<body>
+<nav class="lab-nav">
+  <a class="logo" href="#"><img src="../logo.png" alt="">InRealms</a>
+  <div class="links"><a>Work</a><a>Services</a><a>Process</a></div>
+  <a class="cta">Book a call</a>
+</nav>
+
+<section id="b">
+  <div class="stage">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="fade"></div>
+
+    <!-- The observer. Back to us, looking at Earth. -->
+    <svg class="figure" viewBox="0 0 20 60" aria-hidden="true">
+      <circle cx="10" cy="5" r="3.6" fill="#05060a" stroke="rgba(34,211,238,0.55)" stroke-width="0.6"/>
+      <path d="M5.6 10.5 Q10 9 14.4 10.5 L15.4 30 L13.6 31 L13 57 L10.8 57 L10.2 34 L9.8 34 L9.2 57 L7 57 L6.4 31 L4.6 30 Z" fill="#05060a" stroke="rgba(34,211,238,0.55)" stroke-width="0.6"/>
+    </svg>
+
+    <div class="copy">
+      <p class="hud">InRealms · Websites · Automations · Voice</p>
+      <h1 class="h-hero"><span class="scr" data-text="Not from">Not from</span><br><em class="scr" data-text="around here.">around here.</em></h1>
+    </div>
+    <div class="side hud">
+      <span>Earth · <b>visible</b></span>
+      <span>Sydney <b id="clock">--:--:--</b></span>
+      <span>Orbit drag to look around</span>
+    </div>
+
+    <div class="beat">
+      <p class="sub" style="max-width:42ch;margin:0 auto">I build personal websites for Sydney agents. Vendors pick you before they call anyone else, and every enquiry gets a reply in under a minute, day or night.</p>
+      <div class="actions">
+        <a class="btn" href="#">See what yours could look like</a>
+        <a class="btn-ghost" href="#">The work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="after"><p>Next section lands here, already in the same dark.</p></section>
+<div class="grain"></div>
+<nav class="lab-switch"><a href="a.html">A Film</a><a class="on" href="b.html">B Orbit</a><a href="c.html">C Portal</a><a href="d.html">D Dust</a></nav>
+
+<script type="module">
+  import * as THREE from 'three';
+  import { scrollProgress, scramble, pointer, sydneyClock, reduced } from './lab.js';
+
+  const sec = document.getElementById('b');
+  let P = 0;
+  scrollProgress(sec, p => { P = p; });
+  sydneyClock(document.getElementById('clock'));
+  document.querySelectorAll('.scr').forEach((el, i) => scramble(el, { delay: 500 + i * 450 }));
+  const ptr = pointer();
+
+  const canvas = document.getElementById('gl');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200);
+
+  // ---------- Earth: procedural continents, night lights, cyan rim ----------
+  const NOISE = /* glsl */`
+    vec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}
+    vec4 mod289(vec4 x){return x-floor(x*(1./289.))*289.;}
+    vec4 permute(vec4 x){return mod289(((x*34.)+1.)*x);}
+    vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-.85373472095314*r;}
+    float snoise(vec3 v){
+      const vec2 C=vec2(1./6.,1./3.);const vec4 D=vec4(0.,.5,1.,2.);
+      vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);
+      vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.-g;vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);
+      vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;i=mod289(i);
+      vec4 p=permute(permute(permute(i.z+vec4(0.,i1.z,i2.z,1.))+i.y+vec4(0.,i1.y,i2.y,1.))+i.x+vec4(0.,i1.x,i2.x,1.));
+      float n_=.142857142857;vec3 ns=n_*D.wyz-D.xzx;vec4 j=p-49.*floor(p*ns.z*ns.z);
+      vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.*x_);vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.-abs(x)-abs(y);
+      vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);vec4 s0=floor(b0)*2.+1.;vec4 s1=floor(b1)*2.+1.;vec4 sh=-step(h,vec4(0.));
+      vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+      vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
+      vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
+      vec4 m=max(.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.);m=m*m;
+      return 42.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));}
+    float fbm(vec3 p){float f=0.,a=.5;for(int i=0;i<5;i++){f+=a*snoise(p);p*=2.03;a*=.5;}return f;}
+  `;
+
+  const earthMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uSun: { value: new THREE.Vector3(-0.6, 0.5, 0.6).normalize() } },
+    vertexShader: `varying vec3 vN; varying vec3 vP; varying vec3 vView;
+      void main(){ vN = normalize(normalMatrix*normal); vP = position;
+        vec4 mv = modelViewMatrix*vec4(position,1.); vView = normalize(-mv.xyz);
+        gl_Position = projectionMatrix*mv; }`,
+    fragmentShader: NOISE + `
+      uniform float uTime; uniform vec3 uSun; varying vec3 vN; varying vec3 vP; varying vec3 vView;
+      void main(){
+        vec3 p = normalize(vP);
+        float land = smoothstep(0.02, 0.08, fbm(p*1.7 + vec3(0.,0.,1.3)));
+        float cloud = smoothstep(0.1, 0.55, fbm(p*3.2 + vec3(uTime*0.012, 0., uTime*0.008)));
+        float light = clamp(dot(vN, uSun), 0., 1.);
+        vec3 ocean = mix(vec3(0.01,0.03,0.09), vec3(0.05,0.22,0.55), light);
+        vec3 ground = mix(vec3(0.02,0.04,0.06), vec3(0.16,0.3,0.36), light);
+        vec3 col = mix(ocean, ground, land);
+        // night side city lights, sparse
+        float cities = land * smoothstep(0.55, 0.85, snoise(p*40.)) * (1.-smoothstep(0.,0.25,light));
+        col += vec3(0.4,0.85,1.0) * cities * 0.9;
+        col = mix(col, vec3(0.85,0.92,1.0)*(0.15+light), cloud*0.75);
+        float fres = pow(1. - max(dot(vN, vView), 0.), 3.);
+        col += vec3(0.13,0.83,0.93) * fres * 1.4;
+        gl_FragColor = vec4(col, 1.);
+      }`
+  });
+  const earth = new THREE.Mesh(new THREE.SphereGeometry(1, 128, 128), earthMat);
+  earth.rotation.z = 0.35;
+  scene.add(earth);
+
+  // atmosphere halo
+  const halo = new THREE.Mesh(new THREE.SphereGeometry(1.08, 64, 64), new THREE.ShaderMaterial({
+    transparent: true, side: THREE.BackSide, blending: THREE.AdditiveBlending, depthWrite: false,
+    vertexShader: `varying vec3 vN; void main(){ vN = normalize(normalMatrix*normal); gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.);} `,
+    fragmentShader: `varying vec3 vN; void main(){ float i = pow(clamp(0.62 - dot(vN, vec3(0,0,1.)), 0., 1.), 4.); gl_FragColor = vec4(0.13,0.75,0.95,1.)*i*0.9; }`
+  }));
+  scene.add(halo);
+
+  // stars
+  const starGeo = new THREE.BufferGeometry();
+  const N = 2500, pos = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    const r = 40 + Math.random() * 40, t = Math.random() * Math.PI * 2, f = Math.acos(2 * Math.random() - 1);
+    pos.set([r * Math.sin(f) * Math.cos(t), r * Math.sin(f) * Math.sin(t), r * Math.cos(f)], i * 3);
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xbfd8ff, size: 0.08, sizeAttenuation: true, transparent: true, opacity: 0.8 })));
+
+  // the cloud sea: a field of soft points on a curved horizon below the observer
+  const cloudGeo = new THREE.BufferGeometry();
+  const C = 9000, cp = new Float32Array(C * 3), cs = new Float32Array(C);
+  for (let i = 0; i < C; i++) {
+    const x = (Math.random() - 0.5) * 30, z = Math.random() * -14 + 6;
+    const y = -1.55 - Math.pow(Math.abs(x) / 15, 2) * 0.4 + Math.sin(x * 0.7 + z) * 0.08 + Math.random() * 0.12;
+    cp.set([x, y, z], i * 3); cs[i] = Math.random();
+  }
+  cloudGeo.setAttribute('position', new THREE.BufferAttribute(cp, 3));
+  cloudGeo.setAttribute('seed', new THREE.BufferAttribute(cs, 1));
+  const cloudMat = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    uniforms: { uTime: { value: 0 }, uPR: { value: renderer.getPixelRatio() } },
+    vertexShader: `attribute float seed; uniform float uTime; uniform float uPR; varying float vA;
+      void main(){ vec3 p = position; p.y += sin(uTime*0.4 + seed*6.28 + p.x*0.5)*0.03;
+        vec4 mv = modelViewMatrix*vec4(p,1.); gl_Position = projectionMatrix*mv;
+        gl_PointSize = (40. + seed*60.) * uPR / -mv.z; vA = 0.05 + seed*0.06; }`,
+    fragmentShader: `varying float vA; void main(){ float d = length(gl_PointCoord-.5); gl_FragColor = vec4(0.8,0.88,1.,1.) * vA * smoothstep(.5,0.,d); }`
+  });
+  scene.add(new THREE.Points(cloudGeo, cloudMat));
+
+  // drag to look around
+  let drag = 0, dragV = 0, down = false, lastX = 0;
+  canvas.style.touchAction = 'pan-y';
+  addEventListener('pointerdown', e => { if (e.target === canvas) { down = true; lastX = e.clientX; } });
+  addEventListener('pointerup', () => { down = false; });
+  addEventListener('pointermove', e => { if (down) { dragV = (e.clientX - lastX) * 0.004; lastX = e.clientX; } });
+
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+  }
+  addEventListener('resize', resize); resize();
+
+  const clock = new THREE.Clock();
+  function frame() {
+    const t = clock.getElapsedTime();
+    const q = ptr.step(0.04);
+    earthMat.uniforms.uTime.value = t; cloudMat.uniforms.uTime.value = t;
+    drag += dragV; dragV *= 0.92;
+    earth.rotation.y = (reduced ? 0 : t * 0.03) + drag;
+    // scroll: camera rises off the cloud line and flies toward Earth
+    const e = P * P;
+    camera.position.set(q.x * 0.35, 0.2 + e * 0.9 - q.y * 0.15, 7.5 - e * 5.2);
+    camera.lookAt(0, 1.2 - e * 1.2, 0);
+    earth.position.set(innerWidth < 768 ? 0 : 0.9, 1.15, -2);
+    halo.position.copy(earth.position);
+    const sc = innerWidth < 768 ? 1.1 : 1.25; earth.scale.setScalar(sc); halo.scale.setScalar(sc);
+    renderer.setClearAlpha(0);
+    canvas.style.opacity = String(Math.max(0, Math.min(1, (0.96 - P) / 0.3)));
+    renderer.render(scene, camera);
+    if (!reduced) requestAnimationFrame(frame);
+  }
+  frame();
+  if (reduced) addEventListener('scroll', () => requestAnimationFrame(frame), { passive: true });
+</script>
+</body>
+</html>

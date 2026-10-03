@@ -6,7 +6,7 @@ import { stat, open } from 'node:fs/promises';
 import { join, normalize, extname } from 'node:path';
 
 const ROOT = process.cwd();
-const PORT = Number(process.argv[2]) || 3456;
+const PORT = Number(process.argv[2]) || Number(process.env.PORT) || 3456;
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
