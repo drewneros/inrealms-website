@@ -1911,9 +1911,9 @@
       </div>
 
       <p class="portal-top hud">Websites, automations and voice for Sydney agents</p>
-      <h1 class="portal-title">
-        <span class="portal-half l">Not from</span>
-        <span class="portal-half r"><em>around here.</em></span>
+      <h1 class="portal-title" aria-label="Not from around here.">
+        <span class="portal-half l"><span class="portal-scramble" aria-hidden="true">Not from</span></span>
+        <span class="portal-half r"><em class="portal-scramble" aria-hidden="true">around here.</em></span>
       </h1>
       <p class="portal-hint hud">Scroll to step through</p>
 
@@ -2604,6 +2604,30 @@
         requestAnimationFrame(drawMotes);
       };
       requestAnimationFrame(drawMotes);
+    }
+
+    // Headline letters resolve out of noise, left to right, then hold.
+    if (!portalReduced) {
+      const GLYPHS = '01<>/\\|=+*#%ΛΞΣΩ∆◊';
+      document.querySelectorAll('.portal-scramble').forEach((el, idx) => {
+        const text = el.textContent;
+        el.textContent = '';
+        setTimeout(() => {
+          let frame = 0;
+          const step = () => {
+            frame++;
+            const settled = Math.floor(frame / 2);
+            let out = '';
+            for (let i = 0; i < text.length; i++) {
+              if (i < settled || text[i] === ' ') out += text[i];
+              else if (i < settled + 6) out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
+            }
+            el.textContent = out;
+            if (settled < text.length) setTimeout(step, 28);
+          };
+          step();
+        }, 500 + idx * 450);
+      });
     }
 
     // Sydney time for the viewfinder.
