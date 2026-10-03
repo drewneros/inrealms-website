@@ -77,7 +77,7 @@
           "jobTitle": "Founder",
           "worksFor": { "@id": "https://inrealms.com/#org" }
         },
-        "areaServed": [{ "@type": "City", "name": "Sydney" }, "Worldwide"],
+        "areaServed": "Worldwide",
         "priceRange": "$$",
         "sameAs": ["https://www.instagram.com/inrealms.os/"],
         "aggregateRating": {
@@ -1909,11 +1909,11 @@
       <div class="portal-hudlayer hud" aria-hidden="true">
         <div class="portal-frame"><i></i><i></i><i></i><i></i></div>
         <div class="portal-corner tl"><span>Realm 07</span><span>Observer position</span></div>
-        <div class="portal-corner tr"><span>Sydney <b id="portal-clock">--:--:--</b></span><span>33.87° S · 151.21° E</span></div>
+        <div class="portal-corner tr"><span>Your time <b id="portal-clock">--:--:--</b></span><span>Earth · in view</span></div>
         <div class="portal-corner br"><span>Distance to Earth</span><span class="num"><b>384,400</b> km</span></div>
       </div>
 
-      <p class="portal-top hud">Websites, automations and voice for Sydney agents</p>
+      <p class="portal-top hud">Websites, automations and voice</p>
       <h1 class="portal-title" aria-label="Not from around here.">
         <span class="portal-half l"><span class="portal-scramble" aria-hidden="true">Not from</span></span>
         <span class="portal-half r"><em class="portal-scramble" aria-hidden="true">around here.</em></span>
@@ -1922,7 +1922,7 @@
 
       <div class="portal-beat">
         <p class="portal-line">On this side, every enquiry gets an answer.</p>
-        <p class="portal-sub">I build personal websites for Sydney agents. Vendors pick you before they call anyone else, and every enquiry gets a reply in under a minute, day or night.</p>
+        <p class="portal-sub">I build personal websites for agents. Clients pick you before they call anyone else, and every enquiry gets a reply in under a minute, day or night.</p>
         <div class="portal-actions">
           <button type="button" class="btn-primary" onclick="openBooking()">
             See what yours could look like
@@ -2586,7 +2586,12 @@
       let W = 0, H = 0, cleared = false;
       const fitMotes = () => { const d = Math.min(devicePixelRatio, 2); W = cv.width = cv.clientWidth * d; H = cv.height = cv.clientHeight * d; };
       window.addEventListener('resize', fitMotes); fitMotes();
-      const spawn = () => ({ x: W / 2 + (Math.random() - 0.5) * 4, y: H * (0.1 + Math.random() * 0.8), vx: (Math.random() - 0.5) * 1.6, vy: (Math.random() - 0.5) * 0.3, life: 0, max: 120 + Math.random() * 200, r: Math.random() * 1.6 + 0.3 });
+      const spawn = () => { const vx = (Math.random() - 0.5) * 1.6, vy = (Math.random() - 0.5) * 0.3; return { x: W / 2 + (Math.random() - 0.5) * 4, y: H * (0.1 + Math.random() * 0.8), vx, vy, bvx: vx, bvy: vy, life: 0, max: 120 + Math.random() * 200, r: Math.random() * 1.6 + 0.3 }; };
+      // The cursor pushes the motes aside; they drift back to their own path.
+      const cursor = { x: -9999, y: -9999 };
+      const stageEl = cv.parentElement;
+      stageEl.addEventListener('pointermove', e => { const r = cv.getBoundingClientRect(), d = cv.width / r.width; cursor.x = (e.clientX - r.left) * d; cursor.y = (e.clientY - r.top) * d; }, { passive: true });
+      stageEl.addEventListener('pointerleave', () => { cursor.x = cursor.y = -9999; });
       const motes = Array.from({ length: 140 }, () => { const m = spawn(); m.life = Math.random() * m.max; m.x += m.vx * m.life; return m; });
       const drawMotes = () => {
         const fade = Math.max(0, 1 - portalO * 1.5);
@@ -2594,6 +2599,9 @@
           cleared = false;
           ctx.clearRect(0, 0, W, H);
           for (const m of motes) {
+            const dx = m.x - cursor.x, dy = m.y - cursor.y, dist = Math.hypot(dx, dy), reach = 140 * (cv.width / cv.clientWidth);
+            if (dist < reach && dist > 0.1) { const f = (1 - dist / reach) * 2.2; m.vx += (dx / dist) * f; m.vy += (dy / dist) * f; }
+            m.vx += (m.bvx - m.vx) * 0.05; m.vy += (m.bvy - m.vy) * 0.05;
             m.x += m.vx; m.y += m.vy; m.life++;
             if (m.life > m.max) Object.assign(m, spawn());
             ctx.fillStyle = `rgba(191,244,255,${Math.sin((m.life / m.max) * Math.PI) * 0.8 * fade})`;
@@ -2629,10 +2637,10 @@
       });
     }
 
-    // Sydney time for the viewfinder.
+    // The visitor's own local time for the viewfinder.
     const portalClock = document.getElementById('portal-clock');
     if (portalClock) {
-      const fmt = new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Sydney', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+      const fmt = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
       const tickClock = () => { portalClock.textContent = fmt.format(new Date()); };
       tickClock(); setInterval(tickClock, 1000);
     }
