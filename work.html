@@ -145,7 +145,7 @@
       border: 1px solid rgba(255,255,255,0.10);
       background: #0B111C;
     }
-    .frame img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .frame img, .frame video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
     .frame-desktop { aspect-ratio: 16 / 10; }
     .frame-phone {
       position: absolute;
@@ -155,8 +155,8 @@
       border-color: rgba(255,255,255,0.16);
       box-shadow: 0 30px 60px -12px rgba(0,0,0,0.7);
     }
-    .frame-desktop:hover img { transform: scale(1.015); }
-    .frame-desktop img { transition: transform 1.2s var(--ease-out-strong); }
+    .frame-desktop:hover img, .frame-desktop:hover video { transform: scale(1.015); }
+    .frame-desktop img, .frame-desktop video { transition: transform 1.2s var(--ease-out-strong); }
 
     .case-body {
       display: grid;
@@ -234,7 +234,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .js .case-media .frame-desktop, .js .case-media .frame-phone { clip-path: none; opacity: 1; transform: none; transition: none; }
-      .frame-desktop img { transition: none; }
+      .frame-desktop img, .frame-desktop video { transition: none; }
     }
   </style>
   <script>document.documentElement.classList.add('js');</script>
@@ -268,7 +268,7 @@
       <div class="container">
         <div class="case-media">
           <a class="frame frame-desktop" href="https://michaelalexseifert.com" target="_blank" rel="noopener" aria-label="Open michaelalexseifert.com in a new tab">
-            <img src="portfolio/seifert-desktop.webp" alt="Michael Seifert website on desktop: one figure in a tailored jacket on a white page" width="1440" height="900" loading="lazy" decoding="async" />
+            <video src="portfolio/seifert-scroll.mp4" poster="portfolio/seifert-scroll-poster.jpg" aria-label="Michael Seifert website on desktop: one figure in a tailored jacket on a white page" width="1440" height="900" autoplay loop muted playsinline preload="metadata"></video>
           </a>
           <div class="frame frame-phone" aria-hidden="true">
             <img src="portfolio/seifert-mobile.webp" alt="Michael Seifert website on a phone" width="390" height="844" loading="lazy" decoding="async" />
@@ -308,7 +308,7 @@
       <div class="container">
         <div class="case-media">
           <a class="frame frame-desktop" href="https://saraystudio.it" target="_blank" rel="noopener" aria-label="Open saraystudio.it in a new tab">
-            <img src="portfolio/saray-desktop.webp" alt="Saray Studio website on desktop: a giant Saray Studio wordmark over crumpled silver foil" width="1440" height="900" loading="lazy" decoding="async" />
+            <video src="portfolio/saray-scroll.mp4" poster="portfolio/saray-scroll-poster.jpg" aria-label="Saray Studio website on desktop: a giant Saray Studio wordmark over crumpled silver foil" width="1440" height="900" autoplay loop muted playsinline preload="metadata"></video>
           </a>
           <div class="frame frame-phone" aria-hidden="true">
             <img src="portfolio/saray-mobile.webp" alt="Saray Studio website on a phone" width="390" height="844" loading="lazy" decoding="async" />
@@ -388,7 +388,7 @@
       <div class="container">
         <div class="case-media">
           <a class="frame frame-desktop" href="https://travisaro.app" target="_blank" rel="noopener" aria-label="Open travisaro.app in a new tab">
-            <img src="portfolio/travisaro-desktop.webp" alt="Travisaro website on desktop: headline beside a glowing 3D globe" width="1440" height="900" loading="lazy" decoding="async" />
+            <video src="portfolio/travisaro-scroll.mp4" poster="portfolio/travisaro-scroll-poster.jpg" aria-label="Travisaro website on desktop: headline beside a glowing 3D globe" width="1440" height="900" autoplay loop muted playsinline preload="metadata"></video>
           </a>
           <div class="frame frame-phone" aria-hidden="true">
             <img src="portfolio/travisaro-mobile.webp" alt="Travisaro website on a phone" width="390" height="844" loading="lazy" decoding="async" />
@@ -425,7 +425,7 @@
       <div class="container">
         <div class="case-media">
           <a class="frame frame-desktop" href="https://drewneros.github.io/golden-horde-invite/" target="_blank" rel="noopener" aria-label="Open the Zolotaya Orda Ethno-Park event site in a new tab">
-            <img src="media/work-golden-horde.jpg" alt="Zolotaya Orda event invitation site: fire and cultural photo on the left, Russian invitation text on the right" width="1440" height="900" loading="lazy" decoding="async" />
+            <video src="portfolio/golden-horde-scroll.mp4" poster="portfolio/golden-horde-scroll-poster.jpg" aria-label="Zolotaya Orda event invitation site: fire and cultural photo on the left, Russian invitation text on the right" width="1440" height="900" autoplay loop muted playsinline preload="metadata"></video>
           </a>
           <div class="frame frame-phone" aria-hidden="true">
             <img src="portfolio/golden-horde-mobile.webp" alt="Zolotaya Orda event site on a phone" width="390" height="844" loading="lazy" decoding="async" />
